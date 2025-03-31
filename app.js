@@ -8,6 +8,8 @@ const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 const User = require('./models/user');
+const passport = require('passport');
+
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -17,9 +19,20 @@ app.use(morgan('tiny'));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+require('./helper/passport-config');
+
+app.use(require('express-session')({
+    secret: 'your_secret_key',  
+    resave: false,  
+    saveUninitialized: false 
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',  // برای Gmail
-    port: 587,  // پورت برای TLS
+    //port: 587,  // پورت برای TLS
     secure: false,  // برای استفاده از TLS
     auth: {
         user: process.env.EMAIL_USER,
@@ -44,6 +57,9 @@ app.get('/', (req, res) => {
 });
 app.get('/about', (req, res) => {
     res.render('about', { Title: 'About Me' });
+});
+app.get('/login', (req, res) => {
+    res.render('login', { Title: 'Login', message: '', error: '' });
 });
 app.get('/register', (req, res) => {
     res.render('register', { Title: 'Register', message: '', error: '' });
@@ -79,14 +95,36 @@ app.post('/register', async (req, res) => {
     }
 
 });
-app.get('/verifiy/:token', async (req, res) => {
+app.get('/verify/:token', async (req, res) => {
     try {
         const { token } = req.params;
         const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
-        await User.findByIdAndUpdate({ email: decoded.email }, { isVerified: true, verificationToken: null });
+        await User.findOneAndUpdate({ email: decoded.email }, { isVerified: true, verificationToken: null });
+        res.redirect('/');
     }
     catch (err) {
         console.log(err);
         res.send('Invalid Or expired Token');
     }
+});
+
+// مرحله اول: هدایت به Google برای احراز هویت
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+// مرحله دوم: دریافت اطلاعات از Google و ثبت‌نام کاربر
+app.get('/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    (req, res) => {
+        res.redirect('/'); // پس از ورود موفق، کاربر را به صفحه اصلی هدایت کن
+    }
+);
+
+// خروج از حساب
+app.get('/logout', (req, res) => {
+    req.logout(err => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/');
+    });
 });
