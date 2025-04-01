@@ -5,8 +5,8 @@ const userSchema = new schmea(
     {
         displayName: { type: String, require: true },
         email: { type: String, require: true },
-        isVerified:{type:Boolean,require:true,default:false},
         password: String,
+        isVerified:{type:Boolean,require:true,default:false},
         verificationToken: String
     });
 const User=mongoose.model('User',userSchema);

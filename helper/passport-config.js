@@ -1,7 +1,8 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const User = require('../models/user');  // مدل کاربر
-
+const User = require('../models/user');  
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt');
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -13,10 +14,10 @@ passport.use(new GoogleStrategy({
 
             if (!user) {
                 user = new User({
-                    displayname: profile.displayName,
+                    displayName: profile.displayName,
                     email: profile.emails[0].value,
                     isVerified: true,
-                    hashedPassword: null, // از طریق گوگل نیازی به پسورد نیست
+                    password: null,
                     verificationToken: null
                 });
                 await user.save();
@@ -27,7 +28,29 @@ passport.use(new GoogleStrategy({
         }
     }
 ));
+passport.use(new LocalStrategy({
+    usernameField: 'email',  // استفاده از فیلد ایمیل به عنوان نام کاربری
+    passwordField: 'password'  // استفاده از فیلد پسورد به عنوان رمز عبور
+}, async (email, password, done) => {
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return done(null, false, { message: 'Invalid email or password' });
+        }
+        if (!user.isVerified) {
+            return done(null, false, { message: 'Please verify your email before logging in' });
+        }
 
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return done(null, false, { message: 'Invalid email or password' });
+        }
+
+        return done(null, user);  // در صورت موفقیت، کاربر را باز می‌گرداند
+    } catch (err) {
+        return done(err);  // در صورت بروز خطا، آن را باز می‌گرداند
+    }
+}));
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
