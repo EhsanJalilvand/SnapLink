@@ -1,18 +1,18 @@
 const express = require('express');
 const morgan = require('morgan');
-const nodemailer = require('nodemailer');
-const bcrypt = require('bcrypt');
-const jsonwebtoken = require('jsonwebtoken');
 const dotenv = require('dotenv');
 dotenv.config();
 const cors = require('cors');
 const mongoose = require('mongoose');
-const User = require('./models/user');
 const passport = require('passport');
 const flash = require('connect-flash');
-const authRoutes=require('./routes/auth');
-const indexRoute=require('./routes/index')
-const aboutRoute=require('./routes/about')
+const loginRoute = require('./routes/auth/login');
+const registerRoute = require('./routes/auth/register');
+const googleAuthRoute = require('./routes/auth/googleAuth');
+const verifyRoute = require('./routes/auth/verify');
+const logoutRoute = require('./routes/auth/logout');
+const indexRoute = require('./routes/index')
+const aboutRoute = require('./routes/about')
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -23,15 +23,15 @@ app.use(flash());
 app.set('view engine', 'ejs');
 
 require('./middlewares/authentication');
-const setLocals= require('./middlewares/setLocals');
+const setLocals = require('./middlewares/setLocals');
 app.use(require('express-session')({
-    secret: 'your_secret_key',  
-    resave: false,  
+    secret: 'your_secret_key',
+    resave: false,
     saveUninitialized: false,
     cookie: {
-        httpOnly: true, 
-        secure: process.env.NODE_ENV === 'production', 
-        maxAge: 24 * 60 * 60 * 1000 
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 24 * 60 * 60 * 1000
     }
 }));
 app.use(passport.initialize());
@@ -49,7 +49,10 @@ mongoose.connect(process.env.MONGO_URI)
     )
     .catch(err => console.log(err));
 
-
-app.use('',authRoutes);
-app.use('',indexRoute);
-app.use('',aboutRoute);
+app.use(loginRoute);
+app.use(registerRoute);
+app.use(googleAuthRoute);
+app.use(verifyRoute);
+app.use(logoutRoute);
+app.use(indexRoute);
+app.use(aboutRoute);
