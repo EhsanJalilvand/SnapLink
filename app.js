@@ -19,8 +19,8 @@ app.use(express.static('public'));
 app.use(flash());
 app.set('view engine', 'ejs');
 
-require('./helper/passport-config');
-
+require('./middlewares/authentication');
+const setLocals= require('./middlewares/setLocals');
 app.use(require('express-session')({
     secret: 'your_secret_key',  
     resave: false,  
@@ -33,21 +33,7 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use((req, res, next) => {
-    res.locals.user = req.user || null;
-    if (!res.locals.message)
-    res.locals.message = req.flash('message');
-    if (!res.locals.error)
-    res.locals.error = req.flash('error');
-    if (!res.locals.title)
-    {
-        let filename = req.path.split('/').pop() || 'index'; 
-        console.log(filename);
-        res.locals.title = filename.charAt(0).toUpperCase() + filename.slice(1);
-    }
-    console.log(req.user);
-    next();
-});
+app.use(setLocals());
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',  
