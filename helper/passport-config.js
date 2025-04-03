@@ -29,8 +29,8 @@ passport.use(new GoogleStrategy({
     }
 ));
 passport.use(new LocalStrategy({
-    usernameField: 'email',  // استفاده از فیلد ایمیل به عنوان نام کاربری
-    passwordField: 'password'  // استفاده از فیلد پسورد به عنوان رمز عبور
+    usernameField: 'email',  
+    passwordField: 'password'  
 }, async (email, password, done) => {
     try {
         const user = await User.findOne({ email });
@@ -46,9 +46,9 @@ passport.use(new LocalStrategy({
             return done(null, false, { message: 'Invalid email or password' });
         }
 
-        return done(null, user);  // در صورت موفقیت، کاربر را باز می‌گرداند
+        return done(null, user);  
     } catch (err) {
-        return done(err);  // در صورت بروز خطا، آن را باز می‌گرداند
+        return done(err);  
     }
 }));
 passport.serializeUser((user, done) => {
