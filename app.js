@@ -8,7 +8,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const User = require('./models/user');
 const passport = require('passport');
-
+const flash = require('connect-flash');
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
 app.use(express.static('public'));
-
+app.use(flash());
 app.set('view engine', 'ejs');
 
 require('./helper/passport-config');
@@ -24,12 +24,27 @@ require('./helper/passport-config');
 app.use(require('express-session')({
     secret: 'your_secret_key',  
     resave: false,  
-    saveUninitialized: false 
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true, 
+        secure: process.env.NODE_ENV === 'production', 
+        maxAge: 24 * 60 * 60 * 1000 
+    }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
     res.locals.user = req.user || null;
+    if (!res.locals.message)
+    res.locals.message = req.flash('message');
+    if (!res.locals.error)
+    res.locals.error = req.flash('error');
+    if (!res.locals.title)
+    {
+        let filename = req.path.split('/').pop() || 'index'; 
+        console.log(filename);
+        res.locals.title = filename.charAt(0).toUpperCase() + filename.slice(1);
+    }
     console.log(req.user);
     next();
 });
@@ -56,13 +71,13 @@ mongoose.connect(process.env.MONGO_URI)
 
 
 app.get('/', (req, res) => {
-    res.render('index', { Title: 'Home' });
+    res.render('index', { title: 'Home' });
 });
 app.get('/about', (req, res) => {
-    res.render('about', { Title: 'About Me' });
+    res.render('about');
 });
 app.get('/login', (req, res) => {
-    res.render('login', { Title: 'Login', message: '', error: '' });
+    res.render('login');
 });
 app.post('/login', passport.authenticate('local', {
     successRedirect: '/',  
@@ -70,7 +85,7 @@ app.post('/login', passport.authenticate('local', {
     failureFlash: true 
 }));
 app.get('/register', (req, res) => {
-    res.render('register', { Title: 'Register', message: '', error: '' });
+    res.render('register');
 });
 app.post('/register', async (req, res) => {
     try {
@@ -94,11 +109,12 @@ app.post('/register', async (req, res) => {
             subject: 'Verify Your Email',
             text: `Click here to verify: ${verificationLink}`
         });
-
-        res.render('register', { message: 'Registration successful! Check your email for verification link.', error: '', Title: 'Register' });
+        req.flash('message', 'Registration successful! Check your email for verification link.');
+        res.render('register');
     }
     catch (err) {
-        res.render('register', { message: '', error: 'Registration failed', Title: 'Register' });
+        req.flash('error', 'Registration failed');
+        res.render('register');
         console.error(err);
     }
 
@@ -128,14 +144,6 @@ app.get('/auth/google/callback',
 );
 
 
-app.get('/logout', (req, res) => {
-    req.logout(err => {
-        if (err) {
-            return next(err);
-        }
-        res.redirect('/');
-    });
-});
 app.get('/logout', (req, res) => {
     req.logout(err => {
         if (err) {
