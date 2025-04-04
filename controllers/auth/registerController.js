@@ -1,22 +1,13 @@
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 const User = require('../../models/user');
-const nodemailer = require('nodemailer');
+const emailService = require('../../services/emailService')
 
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',  
-    secure: false,  
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
-});
-
-exports.renderRegisterPage= (req, res) => {
+exports.renderRegisterPage = (req, res) => {
     res.render('register');
 };
 
-exports.register=  async (req, res) => {
+exports.register = async (req, res) => {
     try {
         const { displayname, email, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -33,15 +24,10 @@ exports.register=  async (req, res) => {
         await newUser.save();
 
         const verificationLink = `http://localhost:3000/verify/${verificationToken}`;
-        await transporter.sendMail({
-            from: process.env.EMAIL_USER,
-            to: email,
-            subject: 'Verify Your Email',
-            text: `Click here to verify: ${verificationLink}`
-        });
+        await emailService.sendEmail(email, 'Verify Your Email', `Click here to verify: ${verificationLink}`);
 
         req.flash('message', 'Registration successful! Check your email for verification link.');
-        res.render('register');
+        res.redirect('/register');
     } catch (err) {
         req.flash('error', 'Registration failed');
         res.render('register');

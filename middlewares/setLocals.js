@@ -10,8 +10,11 @@ const setLocals = () => {
             console.log(filename);
             res.locals.title = filename.charAt(0).toUpperCase() + filename.slice(1);
         }
-        console.log(req.user);
+        if (req.method === 'POST')
+            res.locals.formData = { ...req.body } || {};
+        else
+            res.locals.formData = {};
         next();
     }
 }
-module.exports=setLocals;
+module.exports = setLocals;
