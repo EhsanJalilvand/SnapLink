@@ -1,4 +1,4 @@
 
 exports.renderAboutPage= (req, res) => {
-    res.render('about');
+    res.render('about',{ title:res.__('about')});
 };

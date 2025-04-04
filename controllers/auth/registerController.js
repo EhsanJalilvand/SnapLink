@@ -4,7 +4,7 @@ const User = require('../../models/user');
 const emailService = require('../../services/emailService')
 
 exports.renderRegisterPage = (req, res) => {
-    res.render('register');
+    res.render('register',{ title:res.__('register')});
 };
 
 exports.register = async (req, res) => {

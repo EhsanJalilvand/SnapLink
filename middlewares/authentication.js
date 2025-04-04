@@ -30,20 +30,21 @@ passport.use(new GoogleStrategy({
 ));
 passport.use(new LocalStrategy({
     usernameField: 'email',  
-    passwordField: 'password'  
-}, async (email, password, done) => {
+    passwordField: 'password',
+    passReqToCallback: true  
+}, async (req,email, password, done) => {
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            return done(null, false, { message: 'Invalid email or password' });
+            return done(null, false, { message: req.__('invalid_email_or_password') });
         }
         if (!user.isVerified) {
-            return done(null, false, { message: 'Please verify your email before logging in' });
+            return done(null, false, { message: req.__('verify_email') });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return done(null, false, { message: 'Invalid email or password' });
+            return done(null, false, { message: req.__('invalid_email_or_password') });
         }
 
         return done(null, user);  

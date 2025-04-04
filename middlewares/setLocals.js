@@ -13,7 +13,10 @@ const setLocals = () => {
         if (req.method === 'POST')
             res.locals.formData = { ...req.body } || {};
         else
+        {
             res.locals.formData = {};
+            req.flash('error', '');
+        }
         next();
     }
 }
