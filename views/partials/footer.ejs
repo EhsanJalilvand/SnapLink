@@ -1,23 +1,40 @@
     <!-- Footer -->
-    <footer class="bg-dark text-white pt-5 pb-4 mt-5">
+    <footer class="bg-dark text-white pt-5 pb-4 mt-auto">
         <div class="container">
-            <div class="row">
+            <div class="row gy-4">
                 <div class="col-md-4">
-                    <h5 class="mb-3">Contact Me</h5>
+                    <h5 class="mb-3"><i class="fas fa-address-card me-2"></i><%= __('contact') %></h5>
                     <ul class="list-unstyled">
-                        <li><i class="fas fa-phone me-2"></i> (+98)9124346824</li>
-                        <li><i class="fas fa-envelope me-2"></i> ehsan.jalilvand.dev@gmail.com</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> (+98) 912 434 6824</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> ehsan.jalilvand.dev@gmail.com</li>
                         <li><i class="fas fa-map-marker-alt me-2"></i> Iran, Tehran</li>
                     </ul>
                 </div>
+                <div class="col-md-4">
+                    <h5 class="mb-3"><i class="fas fa-link me-2"></i><%= __('quick_links') %></h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="/about" class="text-white text-decoration-none"><i class="fas fa-info-circle me-2"></i><%= __('about') %></a></li>
+                        <li class="mb-2"><a href="/privacy" class="text-white text-decoration-none"><i class="fas fa-shield-alt me-2"></i><%= __('privacy') %></a></li>
+                        <li><a href="/terms" class="text-white text-decoration-none"><i class="fas fa-file-contract me-2"></i><%= __('terms') %></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="mb-3"><i class="fas fa-share-alt me-2"></i><%= __('social_media') %></h5>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3 fs-5"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-white me-3 fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-3 fs-5"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
             </div>
-            <hr class="my-4 bg-light">
+            <hr class="my-4 bg-secondary">
             <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-0">© 2025 All Rights Reserved.</p>
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 SnapLink. <%= __('all_rights_reserved') %></p>
                 </div>
                 <div class="col-md-6">
-                    <div class="text-md-end">
+                    <div class="text-center text-md-end mt-3 mt-md-0">
                         <a href="#" class="text-white me-3"><i class="fab fa-telegram fa-lg"></i></a>
                         <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
                         <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
@@ -30,5 +47,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/js/main.js"></script>
 </body>
 </html>
