@@ -4,7 +4,7 @@ const i18n = require('i18n');
 i18n.configure({
     locales: ['en', 'de', 'fa'],
     directory: path.join(__dirname, 'locales'),
-    defaultLocale: 'fa',
+    defaultLocale: 'en',
     queryParameter: 'lang',
     cookie: 'lang'
 });
