@@ -68,7 +68,8 @@
 	"feature2_desc": "feature2_desc",
 	"feature3_title": "feature3_title",
 	"feature3_desc": "feature3_desc",
-	"generatelink_originalLink_string_max": "generatelink_originalLink_string_max",
-	"login_originalLink_object_unknown": "login_originalLink_object_unknown",
-	"generatelink_originalLink_string_empty": "generatelink_originalLink_string_empty"
+	"generatelink_originalLink_any_required": "Link is required",
+	"generatelink_originalLink_string_empty": "Link is required",
+	"generatelink_originalLink_string_uri": "Please provide a valid URL",
+	"generating": "generating"
 }

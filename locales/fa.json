@@ -32,5 +32,8 @@
 	"register_confirmPassword_any_only": "رمز عبور تأیید باید با رمز عبور مطابقت داشته باشد",
 	"register_confirmPassword_any_required": "تأیید رمز عبور الزامی است",
 	"displayname_string_min": "نام نمایشی بسیار کوتاه است",
-	"confirmPassword_any_only": "تأیید رمز عبور مطابقت ندارد"
+	"confirmPassword_any_only": "تأیید رمز عبور مطابقت ندارد",
+	"generatelink_originalLink_any_required": "لینک الزامی است",
+	"generatelink_originalLink_string_empty": "لینک الزامی است",
+	"generatelink_originalLink_string_uri": "لطفاً یک URL معتبر وارد کنید"
 }

@@ -161,11 +161,36 @@
                         data: { originalLink: originalLink },
                         success: (res) => {
                             console.log(res);
-                            alert(res.message);
+                            alert(res.shortLink);
+                            
+
+                            generateBtn.disabled = true;
+        generateBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span><%= __('generating') %>';
+        
+        // Simulate network delay
+        setTimeout(() => {
+            const shortCode = Math.random().toString(36).substring(2, 8);
+            const shortLink = `${window.location.origin}/s/${shortCode}`;
+            
+            shortLinkText.textContent = shortLink;
+            resultContainer.style.display = "block";
+            visitBtn.href = shortLink;
+            
+            generateBtn.disabled = false;
+            generateBtn.innerHTML = '<i class="fas fa-bolt me-2"></i>aaaaaaa';
+            
+            // Scroll to result
+            resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 1000);
+
+        
                         },
                         error: (xhr, status, error) => {
+                            if (xhr && xhr.status === 401) {
+                                window.location.href = xhr.responseJSON.redirect;
+                                return;
+                            }
                             const errors = xhr.responseJSON;
-                            console.log(errors);
                             if (errors) {
 
                                 const errorMessage = errors.join('\n');;
@@ -173,6 +198,11 @@
                             }
                         }
                     })
+
+
+
+
+
 
                 });
 

@@ -66,5 +66,9 @@
 	"feature3_desc": "feature3_desc",
 	"our_features": "our_features",
 	"learn_more": "learn_more",
-	"explore_all_features": "explore_all_features"
+	"explore_all_features": "explore_all_features",
+	"generatelink_originalLink_any_required": "Link ist erforderlich",
+	"generatelink_originalLink_string_empty": "Link ist erforderlich",
+	"generatelink_originalLink_string_uri": "Bitte geben Sie eine gültige URL ein"
 }
+
