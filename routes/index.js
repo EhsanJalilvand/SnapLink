@@ -10,4 +10,5 @@ router.get('/', indexController.renderIndexPage);
 
 router.post('/generatelink', validationSchema(generatelinkSchema,'index',true), indexController.generateLink);
 
+router.get('/s/:shortId',indexController.visit);
 module.exports = router;

@@ -150,9 +150,8 @@
                 const copyBtn = document.getElementById("copyBtn");
                 const visitBtn = document.getElementById("visitBtn");
 
-                // Generate short link
+
                 generateBtn.addEventListener("click", function () {
-                    console.log('Begin....');
                     const originalLink = linkInput.value.trim();
 
                     $.ajax({
@@ -161,29 +160,21 @@
                         data: { originalLink: originalLink },
                         success: (res) => {
                             console.log(res);
-                            alert(res.shortLink);
-                            
 
                             generateBtn.disabled = true;
-        generateBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span><%= __('generating') %>';
-        
-        // Simulate network delay
-        setTimeout(() => {
-            const shortCode = Math.random().toString(36).substring(2, 8);
-            const shortLink = `${window.location.origin}/s/${shortCode}`;
-            
-            shortLinkText.textContent = shortLink;
-            resultContainer.style.display = "block";
-            visitBtn.href = shortLink;
-            
-            generateBtn.disabled = false;
-            generateBtn.innerHTML = '<i class="fas fa-bolt me-2"></i>aaaaaaa';
-            
-            // Scroll to result
-            resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 1000);
+                            generateBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span><%= __('generating') %>';
 
-        
+                            setTimeout(() => {
+                                shortLinkText.textContent = res.shortLink;
+                                resultContainer.style.display = "block";
+                                visitBtn.href = res.shortLink;
+
+                                generateBtn.disabled = false;
+                                generateBtn.innerHTML = `<i class="fas fa-bolt me-2"></i><%=__("generate_btn")%>`;
+                                resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }, 1000);
+
+
                         },
                         error: (xhr, status, error) => {
                             if (xhr && xhr.status === 401) {
@@ -227,7 +218,7 @@
                         e.preventDefault();
                         const network = this.getAttribute('data-network');
                         const url = encodeURIComponent(shortLinkText.textContent);
-                        const text = encodeURIComponent('Share Text');
+                        const text ='';// encodeURIComponent('Share Text');
 
                         let shareUrl = '';
                         switch (network) {
@@ -245,16 +236,6 @@
                         window.open(shareUrl, '_blank', 'width=600,height=400');
                     });
                 });
-
-                // Helper functions
-                function isValidUrl(string) {
-                    try {
-                        new URL(string);
-                        return true;
-                    } catch (_) {
-                        return false;
-                    }
-                }
 
                 function showAlert(message, type) {
                     const alertDiv = document.createElement('div');
