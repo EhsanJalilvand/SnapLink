@@ -1,257 +1,286 @@
 <%- include('./partials/header.ejs') %>
 
-    <main class="container-fluid py-5 bg-light">
-        <div class="row justify-content-center py-5">
-            <div class="col-12 col-md-10 col-lg-8 text-center mb-5">
-                <h1 class="display-4 fw-bold text-primary mb-3">
-                    <i class="fas fa-link me-2"></i>SnapLink
-                </h1>
-                <p class="lead text-muted">
-                    <%= __('index_description') %>
-                </p>
-            </div>
+<main class="container-fluid py-5 bg-light">
+    <div class="row justify-content-center py-5">
+        <div class="col-12 col-md-10 col-lg-8 text-center mb-5">
+            <h1 class="display-4 fw-bold text-primary mb-3">
+                <i class="fas fa-link me-2"></i>SnapLink
+            </h1>
+            <p class="lead text-muted">
+                <%= __('index_description') %>
+            </p>
+        </div>
 
-            <div class="col-12 col-md-10 col-lg-8">
-                <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
-                    <div class="card-body p-4 p-md-5">
-                        <div class="text-center mb-4">
-                            <h2 class="fw-bold">
-                                <i class="fas fa-magic me-2 text-primary"></i>
-                                <%= __('index_title') %>
-                            </h2>
-                            <p class="text-muted">
-                                <%= __('index_subtitle') %>
-                            </p>
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold">
+                            <i class="fas fa-magic me-2 text-primary"></i>
+                            <%= __('index_title') %>
+                        </h2>
+                        <p class="text-muted">
+                            <%= __('index_subtitle') %>
+                        </p>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="url" class="form-control form-control-lg py-3" id="linkInput"
+                            placeholder="<%= __('enter_url_placeholder') %>" aria-label="URL" required>
+                        <button class="btn btn-primary btn-lg px-4" type="button" id="generateBtn">
+                            <i class="fas fa-bolt me-2"></i>
+                            <%= __('generate_btn') %>
+                        </button>
+                    </div>
+                    
+                    <%- include('./partials/formMessage.ejs') %>
+                    
+                    <div id="resultContainer" class="text-center mt-4" style="display: none;">
+                        <div class="alert alert-success bg-gradient d-inline-flex align-items-center py-3 px-4 rounded-3 shadow-sm"
+                            id="shortLink">
+                            <i class="fas fa-link me-3 fs-4"></i>
+                            <span id="shortLinkText" class="fw-bold"></span>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <input type="url" class="form-control form-control-lg py-3" id="linkInput"
-                                placeholder="<%= __('enter_url_placeholder') %>" aria-label="URL" required>
-                            <button class="btn btn-primary btn-lg px-4" type="button" id="generateBtn">
-                                <i class="fas fa-bolt me-2"></i>
-                                <%= __('generate_btn') %>
+                        <div class="d-flex justify-content-center gap-3 mt-4">
+                            <button type="button" class="btn btn-outline-secondary btn-sm" id="setPasswordBtn" data-bs-toggle="modal" data-bs-target="#passwordModal">
+                                <i class="fas fa-lock me-2"></i> Set Password
                             </button>
+                            <button type="button" class="btn btn-outline-secondary btn-sm" id="setDescriptionBtn" data-bs-toggle="modal" data-bs-target="#descriptionModal">
+                                <i class="fas fa-info-circle me-2"></i> Add Description
+                            </button>
+                            <button class="btn btn-outline-primary px-4 py-2" id="copyBtn">
+                                <i class="fas fa-copy me-2"></i>
+                                <%= __('copy_btn') %>
+                            </button>
+                            <a href="#" class="btn btn-primary px-4 py-2" id="visitBtn" target="_blank">
+                                <i class="fas fa-external-link-alt me-2"></i>
+                                <%= __('visit_btn') %>
+                            </a>
+                         
                         </div>
-                        <%- include('./partials/formMessage.ejs') %>
-                            <div id="resultContainer" class="text-center mt-4" style="display: none;">
-                                <div class="alert alert-success bg-gradient d-inline-flex align-items-center py-3 px-4 rounded-3 shadow-sm"
-                                    id="shortLink">
-                                    <i class="fas fa-link me-3 fs-4"></i>
-                                    <span id="shortLinkText" class="fw-bold"></span>
-                                </div>
 
-                                <div class="d-flex justify-content-center gap-3 mt-4">
-                                    <button class="btn btn-outline-primary px-4 py-2" id="copyBtn">
-                                        <i class="fas fa-copy me-2"></i>
-                                        <%= __('copy_btn') %>
-                                    </button>
-                                    <a href="#" class="btn btn-primary px-4 py-2" id="visitBtn" target="_blank">
-                                        <i class="fas fa-external-link-alt me-2"></i>
-                                        <%= __('visit_btn') %>
+                        <div class="mt-4">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <span class="me-3">
+                                    <%= __('share_on') %>:
+                                </span>
+                                <div class="social-share">
+                                    <a href="#" class="btn btn-sm btn-outline-secondary me-2 rounded-circle"
+                                        data-network="twitter">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-outline-secondary me-2 rounded-circle"
+                                        data-network="telegram">
+                                        <i class="fab fa-telegram"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-outline-secondary me-2 rounded-circle"
+                                        data-network="whatsapp">
+                                        <i class="fab fa-whatsapp"></i>
                                     </a>
                                 </div>
-
-                                <div class="mt-4">
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <span class="me-3">
-                                            <%= __('share_on') %>:
-                                        </span>
-                                        <div class="social-share">
-                                            <a href="#" class="btn btn-sm btn-outline-secondary me-2 rounded-circle"
-                                                data-network="twitter">
-                                                <i class="fab fa-twitter"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-sm btn-outline-secondary me-2 rounded-circle"
-                                                data-network="telegram">
-                                                <i class="fab fa-telegram"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-sm btn-outline-secondary me-2 rounded-circle"
-                                                data-network="whatsapp">
-                                                <i class="fab fa-whatsapp"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Features Section -->
-        <div class="row py-5 mt-5 bg-white">
-            <div class="col-12 text-center mb-5">
-                <h2 class="fw-bold">
-                    <%= __('features_title') %>
-                </h2>
-                <p class="text-muted">
-                    <%= __('features_subtitle') %>
-                </p>
-            </div>
+    <!-- Features Section -->
+    <div class="row py-5 mt-5 bg-white">
+        <div class="col-12 text-center mb-5">
+            <h2 class="fw-bold">
+                <%= __('features_title') %>
+            </h2>
+            <p class="text-muted">
+                <%= __('features_subtitle') %>
+            </p>
+        </div>
 
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 border-0 shadow-sm rounded-3">
-                    <div class="card-body text-center p-4">
-                        <div class="icon-box  bg-opacity-10 text-primary rounded-circle mx-auto mb-4">
-                            <i class="fas fa-tachometer-alt fa-2x"></i>
-                        </div>
-                        <h4 class="fw-bold">
-                            <%= __('feature1_title') %>
-                        </h4>
-                        <p class="text-muted">
-                            <%= __('feature1_desc') %>
-                        </p>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm rounded-3">
+                <div class="card-body text-center p-4">
+                    <div class="icon-box bg-opacity-10 text-primary rounded-circle mx-auto mb-4">
+                        <i class="fas fa-tachometer-alt fa-2x"></i>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 border-0 shadow-sm rounded-3">
-                    <div class="card-body text-center p-4">
-                        <div class="icon-box  bg-opacity-10 text-primary rounded-circle mx-auto mb-4">
-                            <i class="fas fa-chart-line fa-2x"></i>
-                        </div>
-                        <h4 class="fw-bold">
-                            <%= __('feature2_title') %>
-                        </h4>
-                        <p class="text-muted">
-                            <%= __('feature2_desc') %>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 border-0 shadow-sm rounded-3">
-                    <div class="card-body text-center p-4">
-                        <div class="icon-box  bg-opacity-10 text-primary rounded-circle mx-auto mb-4">
-                            <i class="fas fa-lock fa-2x"></i>
-                        </div>
-                        <h4 class="fw-bold">
-                            <%= __('feature3_title') %>
-                        </h4>
-                        <p class="text-muted">
-                            <%= __('feature3_desc') %>
-                        </p>
-                    </div>
+                    <h4 class="fw-bold">
+                        <%= __('feature1_title') %>
+                    </h4>
+                    <p class="text-muted">
+                        <%= __('feature1_desc') %>
+                    </p>
                 </div>
             </div>
         </div>
-    </main>
 
-    <%- include('./partials/footer.ejs') %>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm rounded-3">
+                <div class="card-body text-center p-4">
+                    <div class="icon-box bg-opacity-10 text-primary rounded-circle mx-auto mb-4">
+                        <i class="fas fa-chart-line fa-2x"></i>
+                    </div>
+                    <h4 class="fw-bold">
+                        <%= __('feature2_title') %>
+                    </h4>
+                    <p class="text-muted">
+                        <%= __('feature2_desc') %>
+                    </p>
+                </div>
+            </div>
+        </div>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const generateBtn = document.getElementById("generateBtn");
-                const linkInput = document.getElementById("linkInput");
-                const resultContainer = document.getElementById("resultContainer");
-                const shortLinkText = document.getElementById("shortLinkText");
-                const copyBtn = document.getElementById("copyBtn");
-                const visitBtn = document.getElementById("visitBtn");
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm rounded-3">
+                <div class="card-body text-center p-4">
+                    <div class="icon-box bg-opacity-10 text-primary rounded-circle mx-auto mb-4">
+                        <i class="fas fa-lock fa-2x"></i>
+                    </div>
+                    <h4 class="fw-bold">
+                        <%= __('feature3_title') %>
+                    </h4>
+                    <p class="text-muted">
+                        <%= __('feature3_desc') %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 
-
-                generateBtn.addEventListener("click", function () {
-                    const originalLink = linkInput.value.trim();
-
-                    $.ajax({
-                        url: '/generatelink',
-                        method: 'POST',
-                        data: { originalLink: originalLink },
-                        success: (res) => {
-                            console.log(res);
-
-                            generateBtn.disabled = true;
-                            generateBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span><%= __('generating') %>';
-
-                            setTimeout(() => {
-                                shortLinkText.textContent = res.shortLink;
-                                resultContainer.style.display = "block";
-                                visitBtn.href = res.shortLink;
-
-                                generateBtn.disabled = false;
-                                generateBtn.innerHTML = `<i class="fas fa-bolt me-2"></i><%=__("generate_btn")%>`;
-                                resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            }, 1000);
-
-
-                        },
-                        error: (xhr, status, error) => {
-                            if (xhr && xhr.status === 401) {
-                                window.location.href = xhr.responseJSON.redirect;
-                                return;
-                            }
-                            const errors = xhr.responseJSON;
-                            if (errors) {
-
-                                const errorMessage = errors.join('\n');;
-                                showAlert(errorMessage, 'danger');
-                            }
-                        }
-                    })
+<%- include('./modals/linkDescription.ejs') %>
+<%- include('./modals/linkPassword.ejs') %>
 
 
+<%- include('./partials/footer.ejs') %>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const generateBtn = document.getElementById("generateBtn");
+        const linkInput = document.getElementById("linkInput");
+        const resultContainer = document.getElementById("resultContainer");
+        const shortLinkText = document.getElementById("shortLinkText");
+        const copyBtn = document.getElementById("copyBtn");
+        const visitBtn = document.getElementById("visitBtn");
+        const setPasswordBtn = document.getElementById("setPasswordBtn");
+        const setDescriptionBtn = document.getElementById("setDescriptionBtn");
+
+        
+        // Store the generated short code
+        let generatedShortCode = '';
+        
+        // Generate short link
+        generateBtn.addEventListener("click", function () {
+            const originalLink = linkInput.value.trim();
 
 
+            generateBtn.disabled = true;
+            generateBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span><%= __('generating') %>';
 
+            $.ajax({
+                url: '/generatelink',
+                method: 'POST',
+                data: { 
+                    originalLink: originalLink
+                },
+                success: (res) => {
+                    shortLinkText.textContent = res.shortLink;
+                    generatedShortCode = res.shortCode;
+                    resultContainer.style.display = "block";
+                    visitBtn.href = res.shortLink;
 
-                });
-
-                // Copy short link
-                copyBtn.addEventListener("click", function () {
-                    navigator.clipboard.writeText(shortLinkText.textContent)
-                        .then(() => {
-                            const originalText = copyBtn.innerHTML;
-                            copyBtn.innerHTML = '<i class="fas fa-check me-2"></i>Copied';
-                            setTimeout(() => {
-                                copyBtn.innerHTML = originalText;
-                            }, 2000);
-                        })
-                        .catch(() => {
-                            showAlert('Copy Failed', 'danger');
-                        });
-                });
-
-                // Share buttons
-                document.querySelectorAll('.social-share a').forEach(btn => {
-                    btn.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        const network = this.getAttribute('data-network');
-                        const url = encodeURIComponent(shortLinkText.textContent);
-                        const text ='';// encodeURIComponent('Share Text');
-
-                        let shareUrl = '';
-                        switch (network) {
-                            case 'twitter':
-                                shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
-                                break;
-                            case 'telegram':
-                                shareUrl = `https://t.me/share/url?url=${url}&text=${text}`;
-                                break;
-                            case 'whatsapp':
-                                shareUrl = `https://wa.me/?text=${text}%20${url}`;
-                                break;
-                        }
-
-                        window.open(shareUrl, '_blank', 'width=600,height=400');
-                    });
-                });
-
-                function showAlert(message, type) {
-                    const alertDiv = document.createElement('div');
-                    alertDiv.className = `alert alert-${type} alert-dismissible fade show mt-3`;
-                    alertDiv.innerHTML = `
-            ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        `;
-
-                    const container = linkInput.closest('.input-group').parentNode;
-                    container.insertBefore(alertDiv, container.children[2]);
-
-                    setTimeout(() => {
-                        alertDiv.classList.remove('show');
-                        setTimeout(() => alertDiv.remove(), 150);
-                    }, 5000);
+                    // Reset forms and enable buttons
+                    generateBtn.disabled = false;
+                    generateBtn.innerHTML = '<i class="fas fa-bolt me-2"></i><%= __('generate_btn') %>';
+                    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                },
+                error: (xhr, status, error) => {
+                    generateBtn.disabled = false;
+                    generateBtn.innerHTML = '<i class="fas fa-bolt me-2"></i><%= __('generate_btn') %>';
+                    
+                    if (xhr && xhr.status === 401) {
+                        window.location.href = xhr.responseJSON.redirect;
+                        return;
+                    }
+                    
+                    const errors = xhr.responseJSON;
+                    if (errors) {
+                        const errorMessage = errors.join('\n');
+                        showAlert(errorMessage, 'danger');
+                    } else {
+                        showAlert('An error occurred while generating the link', 'danger');
+                    }
                 }
             });
-        </script>
+        });
+
+        // Copy short link
+        copyBtn.addEventListener("click", function () {
+            navigator.clipboard.writeText(shortLinkText.textContent)
+                .then(() => {
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="fas fa-check me-2"></i>Copied';
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalText;
+                    }, 2000);
+                })
+                .catch(() => {
+                    showAlert('Failed to copy link. Please try again.', 'danger');
+                });
+        });
+
+        // Share buttons
+        document.querySelectorAll('.social-share a').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (!shortLinkText.textContent) {
+                    showAlert('Please generate a link first', 'warning');
+                    return;
+                }
+                
+                const network = this.getAttribute('data-network');
+                const url = encodeURIComponent(shortLinkText.textContent);
+                const text = encodeURIComponent('Check out this short link: ');
+
+                let shareUrl = '';
+                switch (network) {
+                    case 'twitter':
+                        shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+                        break;
+                    case 'telegram':
+                        shareUrl = `https://t.me/share/url?url=${url}&text=${text}`;
+                        break;
+                    case 'whatsapp':
+                        shareUrl = `https://wa.me/?text=${text}%20${url}`;
+                        break;
+                }
+
+                window.open(shareUrl, '_blank', 'width=600,height=400');
+            });
+        });
+
+        // Helper function to show alerts
+        function showAlert(message, type) {
+            // Remove any existing alerts first
+            document.querySelectorAll('.alert-dismissible').forEach(alert => {
+                alert.remove();
+            });
+
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show mt-3`;
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+
+            const container = document.querySelector('.card-body');
+            container.insertBefore(alertDiv, container.children[2]);
+
+            setTimeout(() => {
+                alertDiv.classList.remove('show');
+                setTimeout(() => alertDiv.remove(), 150);
+            }, 5000);
+        }
+    });
+</script>

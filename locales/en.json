@@ -51,7 +51,6 @@
 	"password_hint": "password_hint",
 	"passwords_must_match": "passwords_must_match",
 	"already_have_account": "already_have_account",
-
 	"generatelink_originalLink_any_required": "Link is required",
 	"generatelink_originalLink_string_empty": "Link is required",
 	"generatelink_originalLink_string_uri": "Please provide a valid URL",
@@ -72,5 +71,8 @@
 	"feature2_title": "Analytics Included",
 	"feature2_desc": "Track link clicks and visitor information with built-in analytics.",
 	"feature3_title": "Secure and Private",
-	"feature3_desc": "Your data is encrypted and we never share your links or stats."
+	"feature3_desc": "Your data is encrypted and we never share your links or stats.",
+	"generatelink_password_object_unknown": "generatelink_password_object_unknown",
+	"generatelink_title_object_unknown": "generatelink_title_object_unknown",
+	"generatelink_description_object_unknown": "generatelink_description_object_unknown"
 }

@@ -1,0 +1,61 @@
+<!-- Description Modal -->
+<div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="descriptionModalLabel">
+                    <i class="fas fa-info-circle me-2"></i>Add Link Description
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="descriptionForm">
+                    <input type="hidden" id="linkId" value="">
+                    <div class="mb-3">
+                        <label for="linkTitle" class="form-label">Title (Optional)</label>
+                        <input type="text" class="form-control" id="linkTitle" maxlength="50">
+                        <div class="form-text">Max 50 characters</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="linkDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="linkDescription" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveDescriptionBtn">Save Description</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    function setLinkIdForDescriptionModal(linkId) {
+        document.getElementById('descriptionModalLinkId').value = linkId;
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const saveDescriptionBtn = document.getElementById('saveDescriptionBtn');
+        
+        if(saveDescriptionBtn) {
+            saveDescriptionBtn.addEventListener('click', function() {
+                const linkId = document.getElementById('descriptionModalLinkId').value;
+                const title = document.getElementById('linkTitle').value;
+                const description = document.getElementById('linkDescription').value;
+                
+                fetch(`/s/${linkId}/description`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, description })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.success) {
+                        $('#descriptionModal').modal('hide');
+                    }
+                });
+            });
+        }
+    });
+    </script>
