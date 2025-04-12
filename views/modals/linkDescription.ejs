@@ -12,7 +12,7 @@
                 <form id="descriptionForm">
                     <input type="hidden" id="linkId" value="">
                     <div class="mb-3">
-                        <label for="linkTitle" class="form-label">Title (Optional)</label>
+                        <label for="linkTitle" class="form-label">Title</label>
                         <input type="text" class="form-control" id="linkTitle" maxlength="50">
                         <div class="form-text">Max 50 characters</div>
                     </div>
@@ -32,29 +32,54 @@
 <script>
 
     function setLinkIdForDescriptionModal(linkId) {
-        document.getElementById('descriptionModalLinkId').value = linkId;
+        document.getElementById('linkId').value = linkId;
     }
     
     document.addEventListener('DOMContentLoaded', function() {
-        const saveDescriptionBtn = document.getElementById('saveDescriptionBtn');
-        
+        const form=document.getElementById("");
         if(saveDescriptionBtn) {
             saveDescriptionBtn.addEventListener('click', function() {
-                const linkId = document.getElementById('descriptionModalLinkId').value;
+                linkId = document.getElementById('linkId').value;
+                console.log(linkId,'linkId');
                 const title = document.getElementById('linkTitle').value;
                 const description = document.getElementById('linkDescription').value;
                 
-                fetch(`/s/${linkId}/description`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ title, description })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if(data.success) {
-                        $('#descriptionModal').modal('hide');
+
+                $.ajax({
+                url: `/s/description`,
+                method: 'PUT',
+                data: {
+                    id:linkId, 
+                    title,
+                    description
+                },
+                success: (res) => {
+                    $('#descriptionForm')[0].reset();
+                    $('#descriptionModal').modal('hide');
+                    
+                },
+                error: (xhr, status, error) => {
+
+                    if (xhr && xhr.status === 401) {
+                        window.location.href = xhr.responseJSON.redirect;
+                        return;
                     }
-                });
+                    
+                    const errors = xhr.responseJSON;
+                    if (errors) {
+                        const errorMessage = errors.join('\n');
+                        showAlert(errorMessage, 'danger');
+                    } else {
+                        showAlert('An error occurred while generating the link', 'danger');
+                    }
+                }
+            });
+
+
+
+
+
+
             });
         }
     });

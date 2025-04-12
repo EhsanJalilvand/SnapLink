@@ -1,0 +1,151 @@
+<div class="modal fade" id="datePickerModal" tabindex="-1" aria-labelledby="datePickerModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="datePickerModalLabel">
+            <i class="fas fa-calendar-alt me-2"></i>
+            <%= lang === 'fa' ? 'انتخاب تاریخ' : 'Select Date' %>
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-9">
+              <div id="datepickerWidget" class="border rounded p-3"></div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="manualDateInput" class="form-label">
+                  <%= lang === 'fa' ? 'تاریخ دستی' : 'Manual Date' %>
+                </label>
+                <input type="text" class="form-control" id="manualDateInput" 
+                       placeholder="<%= lang === 'fa' ? '1403/05/15' : '2024-05-15' %>">
+              </div>
+              
+              <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" id="disableDateSwitch">
+                <label class="form-check-label" for="disableDateSwitch">
+                  <%= lang === 'fa' ? 'غیرفعال کردن تاریخ' : 'Disable Date' %>
+                </label>
+              </div>
+              
+              <div class="card bg-light">
+                <div class="card-body text-center">
+                  <h5 id="selectedDateDisplay" class="text-primary">
+                    <%= lang === 'fa' ? 'تاریخ انتخاب نشده' : 'No date selected' %>
+                  </h5>
+                  <input type="hidden" id="finalDateValue">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times me-2"></i>
+            <%= lang === 'fa' ? 'انصراف' : 'Cancel' %>
+          </button>
+          <button type="button" class="btn btn-primary" id="confirmDateBtn">
+            <i class="fas fa-check me-2"></i>
+            <%= lang === 'fa' ? 'تأیید' : 'Confirm' %>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+  $(function() {
+    // تنظیمات اولیه تقویم بر اساس زبان
+    const datepickerConfig = {
+      dateFormat: '<%= lang === 'fa' ? 'yy/mm/dd' : 'yy-mm-dd' %>',
+      onSelect: function(dateText) {
+        if(!$("#disableDateSwitch").prop('checked')) {
+          $("#manualDateInput").val(dateText);
+          updateSelectedDateDisplay(dateText);
+        }
+      }
+    };
+  
+    <% if(lang === 'fa') { %>
+      // تنظیمات خاص برای تقویم شمسی
+      datepickerConfig.regional = 'fa';
+      $.extend(datepickerConfig, {
+        isRTL: true,
+        calendar: $.calendars.instance('persian')
+      });
+    <% } %>
+  
+    // Initialize datepicker
+    $("#datepickerWidget").datepicker(datepickerConfig);
+  
+    // رویداد تغییر تاریخ دستی
+    $("#manualDateInput").on('change', function() {
+      const dateText = $(this).val();
+      if(isValidDate(dateText)) {
+        updateSelectedDateDisplay(dateText);
+        $("#datepickerWidget").datepicker("setDate", dateText);
+      }
+    });
+  
+    // سوئیچ غیرفعال کردن تاریخ
+    $("#disableDateSwitch").change(function() {
+      const isDisabled = $(this).prop('checked');
+      $("#datepickerWidget").datepicker("option", "disabled", isDisabled);
+      $("#manualDateInput").prop('disabled', isDisabled);
+      
+      if(isDisabled) {
+        $("#manualDateInput").val('');
+        $("#selectedDateDisplay").html(
+          `<span class="text-muted">${
+            '<%= lang === 'fa' ? 'تاریخ غیرفعال شد' : 'Date disabled' %>'
+          }</span>`
+        );
+        $("#finalDateValue").val('');
+      }
+    });
+  
+    // تابع اعتبارسنجی تاریخ
+    function isValidDate(dateString) {
+      const pattern = <%= lang === 'fa' ? 
+        '/^\\d{4}\\/\\d{2}\\/\\d{2}$/' : 
+        '/^\\d{4}-\\d{2}-\\d{2}$/' %>;
+      return dateString.match(pattern) !== null;
+    }
+  
+    // تابع به‌روزرسانی نمایش تاریخ
+    function updateSelectedDateDisplay(dateText) {
+      if(dateText) {
+        $("#selectedDateDisplay").html(
+          `<i class="fas fa-calendar-check me-2"></i>${dateText}`
+        );
+        $("#finalDateValue").val(dateText);
+      }
+    }
+  
+    // دکمه تأیید
+    $("#confirmDateBtn").click(function() {
+      const modal = bootstrap.Modal.getInstance($('#datePickerModal')[0]);
+      let selectedDate = '';
+      
+      if(!$("#disableDateSwitch").prop('checked')) {
+        selectedDate = $("#manualDateInput").val();
+        if(!selectedDate) {
+          alert("<%= lang === 'fa' ? 
+            'لطفاً تاریخ را انتخاب کنید یا گزینه غیرفعال کردن را انتخاب نمایید' : 
+            'Please select a date or disable date selection' %>");
+          return;
+        }
+      }
+      
+      console.log("Selected date:", selectedDate || "No date (disabled)");
+      modal.hide();
+    });
+  
+    // حل مشکل focus پس از بستن مدال
+    $('#datePickerModal').on('hidden.bs.modal', function () {
+      $('body').removeClass('modal-open');
+      $('.modal-backdrop').remove();
+    });
+  });
+  </script>
