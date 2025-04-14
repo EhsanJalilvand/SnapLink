@@ -12,6 +12,7 @@ router.post('/generatelink', validationSchema(generatelinkSchema,'index',true), 
 
 router.put('/s/description',indexController.updateDescription);
 router.put('/s/password',indexController.updatePassword);
+router.put('/s/expireDate',indexController.updateExpireDate);
 router.get('/s/:shortId',indexController.visit);
 
 

@@ -46,7 +46,6 @@ exports.updateDescription = async (req, res) => {
     if (!req.user)
         return res.status(401).json({ message: 'Please Login into System', redirect: '/login' });
     const shortLink = await ShortLink.findById(req.body.id);
-    console.log(req.user,req.user._id);
     if (shortLink && shortLink.userId != req.user._id)
         return res.status(400).json({ message: 'Input Data Is Not Correct' });
     shortLink.title = req.body.title;
@@ -58,13 +57,25 @@ exports.updatePassword = async (req, res) => {
     if (!req.user)
         return res.status(401).json({ message: 'Please Login into System', redirect: '/login' });
     const shortLink = await ShortLink.findById(req.body.id);
-    console.log(req.user,req.user._id);
     if (shortLink && shortLink.userId != req.user._id)
         return res.status(400).json({ message: 'Input Data Is Not Correct' });
     shortLink.password =await bcrypt.hash(req.body.password,10);
     shortLink.save();
     res.json({ id: shortLink._id });
 }
+
+exports.updateExpireDate = async (req, res) => {
+    console.log(req.body);
+    if (!req.user)
+        return res.status(401).json({ message: 'Please Login into System', redirect: '/login' });
+    const shortLink = await ShortLink.findById(req.body.id);
+    if (shortLink && shortLink.userId != req.user._id)
+        return res.status(400).json({ message: 'Input Data Is Not Correct' });
+    shortLink.expireDateTime =req.body.expireDate;
+    shortLink.save();
+    res.json({ id: shortLink._id });
+}
+
 
 async function generateShortLink(req, originalLink, callback) {
 

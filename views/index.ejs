@@ -43,7 +43,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-center gap-3 mt-4">
-                                    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#datePickerModal">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" id="setExpireDateBtn" data-bs-toggle="modal" data-bs-target="#datePickerModal">
                                         <i class="fas fa-calendar me-2"></i>Select Expire Date
                                       </button>
                                     <%- include('./modals/datePicker.ejs') %>
@@ -171,7 +171,7 @@
                         const visitBtn = document.getElementById("visitBtn");
                         const setPasswordBtn = document.getElementById("setPasswordBtn");
                         const setDescriptionBtn = document.getElementById("setDescriptionBtn");
-
+                        const setExpireDateBtn=document.getElementById("setExpireDateBtn");
 
                         // Store the generated short code
                         let linkId = '';
@@ -227,6 +227,10 @@
                         });
                         setPasswordBtn.addEventListener('click',()=>{
                             setLinkIdForPasswordModal(linkId);
+
+                        });
+                        setExpireDateBtn.addEventListener('click',()=>{
+                            setLinkIdForDatePickerModal(linkId);
 
                         });
 

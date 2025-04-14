@@ -1,19 +1,25 @@
 <!-- Persian Datepicker CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css"/>
 <style>
+  .date-picker-modal .modal-dialog {
+    max-width: 400px;
+  }
+  
   .date-picker-container {
     position: relative;
+    margin-bottom: 1rem;
   }
   
   .date-input-trigger {
     display: flex;
     align-items: center;
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0.75rem;
     border: 1px solid #ced4da;
     border-radius: 0.375rem;
     background-color: #fff;
     cursor: pointer;
     transition: all 0.2s;
+    height: 40px;
   }
   
   .date-input-trigger:hover {
@@ -23,6 +29,14 @@
   .date-input-trigger i {
     margin-left: 0.5rem;
     color: #6c757d;
+    font-size: 0.9rem;
+  }
+  
+  .date-input-trigger span {
+    flex-grow: 1;
+    text-align: right;
+    font-size: 0.9rem;
+    color: #495057;
   }
   
   .date-input-hidden {
@@ -32,10 +46,32 @@
     width: 0;
   }
   
-  .form-switch .form-check-input {
+  .date-picker-modal .form-switch {
+    display: flex;
+    align-items: center;
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+  }
+  
+  .date-picker-modal .form-switch .form-check-input {
     width: 2.5em;
-    height: 1.5em;
+    height: 1.25em;
     margin-left: 0;
+    margin-right: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .date-picker-modal .form-switch .form-check-label {
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .date-picker-modal .form-switch i {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    color: #6c757d;
   }
   
   /* Persian Calendar Adjustments */
@@ -47,42 +83,53 @@
   .persian-datepicker-rtl {
     direction: rtl;
   }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 576px) {
+    .date-picker-modal .modal-dialog {
+      margin: 0.5rem auto;
+    }
+    
+    .date-input-trigger {
+      padding: 0.4rem 0.6rem;
+      height: 36px;
+    }
+  }
 </style>
 
-<div class="modal fade" id="datePickerModal" tabindex="-1" aria-labelledby="datePickerModalLabel" aria-hidden="true">
+<div class="modal fade date-picker-modal" id="datePickerModal" tabindex="-1" aria-labelledby="datePickerModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       
       <!-- Header -->
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="datePickerModalLabel">
+      <div class="modal-header bg-primary text-white py-2">
+        <h5 class="modal-title fs-6" id="datePickerModalLabel">
           <i class="fas fa-calendar-day me-2"></i>
-          <%= lang === 'fa' ? 'انتخاب تاریخ' : 'Select Date' %>
+          <%= __('datepicker_title') %>
         </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="<%= __('close') %>"></button>
       </div>
 
       <!-- Body -->
-      <div class="modal-body">
-        <div class="date-picker-container mb-3">
+      <div class="modal-body py-3">
+        <div class="date-picker-container">
           <!-- Hidden Date Input -->
+          <input type="hidden" id="linkId" value="">
           <input type="text" id="datepickerWidget" class="date-input-hidden" />
           
           <!-- Visible Trigger -->
           <div class="date-input-trigger" id="dateInputTrigger">
-            <i class="fas fa-calendar-alt me-2"></i>
-            <span id="dateDisplayText" >
-            
-            </span>
+            <i class="fas fa-calendar-alt"></i>
+            <span id="dateDisplayText"><%= __('select_date_placeholder') %></span>
           </div>
         </div>
 
         <!-- Disable Date Switch -->
-        <div class="form-check form-switch mb-3">
+        <div class="form-switch">
           <input class="form-check-input" type="checkbox" id="disableDateSwitch" />
           <label class="form-check-label" for="disableDateSwitch">
-            <i class="fas fa-power-off me-2"></i>
-            <%= lang === 'fa' ? 'غیرفعال کردن تاریخ' : 'Disable Date' %>
+            <i class="fas fa-power-off"></i>
+            <%= __('disable_date') %>
           </label>
         </div>
         
@@ -90,14 +137,14 @@
       </div>
 
       <!-- Footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-          <i class="fas fa-times me-2"></i>
-          <%= lang === 'fa' ? 'انصراف' : 'Cancel' %>
+      <div class="modal-footer py-2">
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">
+          <i class="fas fa-times me-1"></i>
+          <%= __('cancel') %>
         </button>
-        <button type="button" class="btn btn-primary" id="confirmDateBtn">
-          <i class="fas fa-check me-2"></i>
-          <%= lang === 'fa' ? 'تأیید' : 'Confirm' %>
+        <button type="button" class="btn btn-sm btn-primary" id="confirmDateBtn">
+          <i class="fas fa-check me-1"></i>
+          <%= __('confirm') %>
         </button>
       </div>
     </div>
@@ -106,12 +153,13 @@
 
 <!-- JS Dependencies -->
 <script src="https://cdn.jsdelivr.net/npm/persian-date/dist/persian-date.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/persian-date@1.0.6/dist/persian-date.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
-
 <script>
+    function setLinkIdForDatePickerModal(linkId) {
+        document.getElementById('linkId').value = linkId;
+    }
 $(function() {
   // Initialize datepicker
   const initDatePicker = () => {
@@ -127,32 +175,41 @@ $(function() {
         calendarSwitch: { enabled: false }
       },
       onSelect: function(unix) {
-        const dateText = new persianDate(unix).format(dateFormat);
-        $("#dateDisplayText").text(dateText);
-        $("#finalDateValue").val(dateText);
+        if(!$("#disableDateSwitch").prop('checked')) {
+          const dateText = new persianDate(unix).format(dateFormat);
+          $("#dateDisplayText").text(dateText);
+          $("#finalDateValue").val(dateText);
+        }
       }
     });
     
     // Trigger datepicker when clicking on the visible element
     $("#dateInputTrigger").click(function() {
-      $("#datepickerWidget").focus();
+      if(!$("#disableDateSwitch").prop('checked')) {
+        $("#datepickerWidget").focus();
+      }
     });
   };
 
   // Toggle date input
   $("#disableDateSwitch").change(function() {
     const isDisabled = $(this).prop('checked');
-    $("#dateInputTrigger").toggleClass("bg-light", isDisabled);
     
     if(isDisabled) {
-      $("#dateDisplayText").text(
-        '<%= lang === 'fa' ? 'تاریخ غیرفعال شد' : 'Date disabled' %>'
-      );
+      $("#dateDisplayText").text('<%= __('date_disabled') %>');
       $("#finalDateValue").val('');
+      $("#datepickerWidget").val('');
+      
+      $("#dateInputTrigger").css({
+        'background-color': '#f8f9fa',
+        'cursor': 'not-allowed'
+      });
     } else {
-      $("#dateDisplayText").text(
-        '<%= lang === 'fa' ? 'تاریخ را انتخاب کنید' : 'Select a date' %>'
-      );
+      $("#dateDisplayText").text('<%= __('select_date_placeholder') %>');
+      $("#dateInputTrigger").css({
+        'background-color': '#fff',
+        'cursor': 'pointer'
+      });
     }
   });
 
@@ -160,18 +217,46 @@ $(function() {
   $("#confirmDateBtn").click(function() {
     const selectedDate = $("#finalDateValue").val();
     const isDisabled = $("#disableDateSwitch").prop('checked');
+    linkId = document.getElementById('linkId').value;
+      $.ajax({
+                url: `/s/expireDate`,
+                method: 'PUT',
+                data: {
+                    id:linkId, 
+                    expireDate:(isDisabled || selectedDate==='') ? null : selectedDate
+                },
+                success: (res) => {
+                  $('#datePickerModal').modal('hide');
+                },
+                error: (xhr, status, error) => {
+
+                    if (xhr && xhr.status === 401) {
+                        window.location.href = xhr.responseJSON.redirect;
+                        return;
+                    }
+                    
+                    const errors = xhr.responseJSON;
+                    if (errors) {
+                        const errorMessage = errors.join('\n');
+                        showAlert(errorMessage, 'danger');
+                    } else {
+                        showAlert('An error occurred while generating the link', 'danger');
+                    }
+                }
+            });
+
+
     
-    if(!isDisabled && !selectedDate) {
-      alert(
-        '<%= lang === 'fa' ? 
-          'لطفاً تاریخ را انتخاب کنید' : 
-          'Please select a date' %>'
-      );
-      return;
-    }
     
-    console.log("Selected date:", selectedDate || "Date disabled");
-    $('#datePickerModal').modal('hide');
+    // console.log("Selected date:", selectedDate || "Date disabled");
+    // $('#datePickerModal').modal('hide');
+    
+    // if(typeof onDateSelected === 'function') {
+    //   onDateSelected({
+    //     date: selectedDate,
+    //     isDisabled: isDisabled
+    //   });
+    // }
   });
 
   // Initialize

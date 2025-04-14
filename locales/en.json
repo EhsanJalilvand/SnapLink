@@ -74,5 +74,13 @@
 	"feature3_desc": "Your data is encrypted and we never share your links or stats.",
 	"generatelink_password_object_unknown": "generatelink_password_object_unknown",
 	"generatelink_title_object_unknown": "generatelink_title_object_unknown",
-	"generatelink_description_object_unknown": "generatelink_description_object_unknown"
+	"generatelink_description_object_unknown": "generatelink_description_object_unknown",
+	"datepicker_title": "datepicker_title",
+	"close": "close",
+	"select_date_placeholder": "select_date_placeholder",
+	"disable_date": "disable_date",
+	"cancel": "cancel",
+	"confirm": "confirm",
+	"date_disabled": "date_disabled",
+	"select_date_alert": "select_date_alert"
 }

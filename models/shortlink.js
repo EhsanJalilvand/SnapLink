@@ -9,7 +9,7 @@ relativeLink:{type:String,require:true},
 title:{type:String,require:false},
 description:{type:String,require:false},
 isEnable:{type:Boolean,require:true},
-expiredDateTime:{type:Date,require:false},
+expireDateTime:{type:Date,require:false},
 password:{type:String,require:false}
 });
 const ShortLink=mongoose.model('shortLink',shortLinkSchema);
