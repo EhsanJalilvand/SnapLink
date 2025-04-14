@@ -82,5 +82,11 @@
 	"cancel": "cancel",
 	"confirm": "confirm",
 	"date_disabled": "date_disabled",
-	"select_date_alert": "select_date_alert"
+	"select_date_alert": "select_date_alert",
+	"confirmLink": "confirmLink",
+	"password_required": "password_required",
+	"enter_password_to_access": "enter_password_to_access",
+	"password_placeholder": "password_placeholder",
+	"invalid_password": "invalid_password",
+	"connection_error": "connection_error"
 }

@@ -16,6 +16,7 @@ const logoutRoute = require('./routes/auth/logout');
 const indexRoute = require('./routes/index')
 const aboutRoute = require('./routes/about')
 const languageRoute=require('./routes/language')
+const confirmLinkRoute = require('./routes/confirmLink')
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -66,3 +67,4 @@ app.use(logoutRoute);
 app.use(indexRoute);
 app.use(aboutRoute);
 app.use(languageRoute);
+app.use(confirmLinkRoute);

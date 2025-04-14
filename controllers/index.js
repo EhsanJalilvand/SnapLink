@@ -34,12 +34,15 @@ exports.visit = async (req, res) => {
     const shortId = req.params.shortId;
     if (!shortId)
         return;
-    console.log(shortId, 'zzzzzz');
-    const record = await ShortLink.findOne({ relativeLink: shortId });
-    if (!record)
+    const shortLink = await ShortLink.findOne({ relativeLink: shortId });
+    if (!shortLink)
         return;
-    console.log(record.originalLink);
-    res.redirect(record.originalLink);
+    if(shortLink.password)
+    {
+        console.log('Id:',shortLink._id);
+       return res.render("confirmLink",{linkId:shortLink._id});
+    }
+    res.redirect(shortLink.originalLink);
 };
 
 exports.updateDescription = async (req, res) => {
