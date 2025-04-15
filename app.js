@@ -8,6 +8,7 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser'); 
 const { i18n, setLanguage } = require('./language');
+const notFoundController=require('./controllers/notFoundController')
 const loginRoute = require('./routes/auth/login');
 const registerRoute = require('./routes/auth/register');
 const googleAuthRoute = require('./routes/auth/googleAuth');
@@ -17,6 +18,7 @@ const indexRoute = require('./routes/index')
 const aboutRoute = require('./routes/about')
 const languageRoute=require('./routes/language')
 const confirmLinkRoute = require('./routes/confirmLink')
+const expiredLinkRoute = require('./routes/expiredLink')
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -68,3 +70,5 @@ app.use(indexRoute);
 app.use(aboutRoute);
 app.use(languageRoute);
 app.use(confirmLinkRoute);
+app.use(expiredLinkRoute);
+app.use(notFoundController.notFoundPage);

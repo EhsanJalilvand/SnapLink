@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html >
+<html dir="<%= lang === 'fa' ? 'rtl' : 'ltr' %>">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
         <title><%= title %></title>
       
         <!-- Bootstrap CSS -->
@@ -30,8 +33,8 @@
       
       </head>
       
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+<body >
+    <nav dir="ltr" class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold" href="/">
                 <i class="fas fa-link me-2 text-primary"></i>SnapLink

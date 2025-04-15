@@ -59,5 +59,20 @@
 	"privacy": "privacy",
 	"terms": "terms",
 	"social_media": "social_media",
-	"all_rights_reserved": "all_rights_reserved"
+	"all_rights_reserved": "all_rights_reserved",
+	"datepicker_title": "datepicker_title",
+	"close": "close",
+	"select_date_placeholder": "select_date_placeholder",
+	"disable_date": "disable_date",
+	"cancel": "cancel",
+	"confirm": "confirm",
+	"date_disabled": "date_disabled",
+	"please_enter_displayname": "please_enter_displayname",
+	"please_enter_valid_email": "please_enter_valid_email",
+	"password_min_length": "password_min_length",
+	"password_hint": "password_hint",
+	"passwords_must_match": "passwords_must_match",
+	"already_have_account": "already_have_account",
+	"please_enter_password": "please_enter_password",
+	"register_here": "register_here"
 }

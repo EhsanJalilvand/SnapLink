@@ -37,6 +37,13 @@ exports.visit = async (req, res) => {
     const shortLink = await ShortLink.findOne({ relativeLink: shortId });
     if (!shortLink)
         return;
+    const currentDate = new Date();
+    console.log(shortLink,currentDate)
+    if(shortLink.expireDateTime<=currentDate)
+    {
+        console.log('Expired.................')
+       return res.render("expiredLink",{expireDate:shortLink.expireDateTime});
+    }
     if(shortLink.password)
     {
         console.log('Id:',shortLink._id);

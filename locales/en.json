@@ -1,4 +1,5 @@
 {
+	"404": "404",
 	"Home": "Home",
 	"about": "About",
 	"logout": "Logout",
@@ -88,5 +89,24 @@
 	"enter_password_to_access": "enter_password_to_access",
 	"password_placeholder": "password_placeholder",
 	"invalid_password": "invalid_password",
-	"connection_error": "connection_error"
+	"connection_error": "connection_error",
+	"expiredLink": "expiredLink",
+	"Link Expired": "Link Expired",
+	"This link has expired and is no longer available.": "This link has expired and is no longer available.",
+	"Expired on:": "Expired on:",
+	"Go to Homepage": "Go to Homepage",
+	"Oops! Time's Up": "Oops! Time's Up",
+	"This shortcut link has reached its expiration date and is no longer accessible.": "This shortcut link has reached its expiration date and is no longer accessible.",
+	"Homepage": "Homepage",
+	"Create New": "Create New",
+	"Need help?": "Need help?",
+	"Contact us": "Contact us",
+	"Your Company Name": "Your Company Name",
+	"404 - Page Not Found": "404 - Page Not Found",
+	"Oops! Lost in Space": "Oops! Lost in Space",
+	"The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+	"Contact Support": "Contact Support",
+	"Tried to access:": "Tried to access:",
+	"The page you requested could not be found.": "The page you requested could not be found.",
+	"Go Home": "Go Home"
 }

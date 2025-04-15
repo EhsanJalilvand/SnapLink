@@ -1,0 +1,51 @@
+<%- include('./partials/header.ejs') %>
+
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .expired-container {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .expired-card {
+        max-width: 500px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: none;
+    }
+    .expired-icon {
+        font-size: 5rem;
+        color: #dc3545;
+        margin-bottom: 20px;
+    }
+    .btn-home {
+        background-color: #0d6efd;
+        color: white;
+        padding: 10px 25px;
+        border-radius: 50px;
+    }
+</style>
+<div class="container expired-container">
+    <div class="card expired-card text-center p-4">
+        <div class="card-body">
+            <div class="expired-icon">
+                <i class="bi bi-clock-history"></i>
+            </div>
+            <h2 class="card-title mb-3"><%= __('Link Expired') %></h2>
+            <p class="card-text mb-4">
+                <%= __('This link has expired and is no longer available.') %>
+            </p>
+            <p class="text-muted small mb-4">
+                <%= __('Expired on:') %> <%= expireDate.toLocaleDateString() %>
+            </p>
+            <a href="/" class="btn btn-home">
+                <i class="bi bi-house-door"></i> <%= __('Go to Homepage') %>
+            </a>
+        </div>
+    </div>
+</div>
+<%- include('./partials/footer.ejs') %>

@@ -70,6 +70,12 @@
 	"feature2_title": "Inklusive Analyse",
 	"feature2_desc": "Verfolge Klicks und Besucherinformationen mit integrierter Analysefunktion.",
 	"feature3_title": "Sicher und privat",
-	"feature3_desc": "Deine Daten sind verschlüsselt und wir teilen deine Links oder Statistiken niemals."
+	"feature3_desc": "Deine Daten sind verschlüsselt und wir teilen deine Links oder Statistiken niemals.",
+	"datepicker_title": "datepicker_title",
+	"close": "close",
+	"select_date_placeholder": "select_date_placeholder",
+	"disable_date": "disable_date",
+	"cancel": "cancel",
+	"confirm": "confirm",
+	"date_disabled": "date_disabled"
 }
-
