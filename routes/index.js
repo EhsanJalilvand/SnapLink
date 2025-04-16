@@ -1,19 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const indexController = require('..//controllers/index')
+const indexController = require('..//controllers/indexController')
 
-const generatelinkSchema = require('../services/validationSchemas/generatelinkSchema')
-const validationSchema = require('../services/validationSchema')
 
 router.get('/', indexController.renderIndexPage);
 
 
-router.post('/generatelink', validationSchema(generatelinkSchema,'index',true), indexController.generateLink);
-
-router.put('/s/description',indexController.updateDescription);
-router.put('/s/password',indexController.updatePassword);
-router.put('/s/expireDate',indexController.updateExpireDate);
-router.get('/s/:shortId',indexController.visit);
 
 
 module.exports = router;

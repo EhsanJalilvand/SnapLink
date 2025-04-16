@@ -15,10 +15,12 @@ const googleAuthRoute = require('./routes/auth/googleAuth');
 const verifyRoute = require('./routes/auth/verify');
 const logoutRoute = require('./routes/auth/logout');
 const indexRoute = require('./routes/index')
+const shortLinkRoute = require('./routes/shortLink')
 const aboutRoute = require('./routes/about')
 const languageRoute=require('./routes/language')
 const confirmLinkRoute = require('./routes/confirmLink')
 const expiredLinkRoute = require('./routes/expiredLink')
+const dashboardRoute = require('./routes/dashboard')
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -67,8 +69,10 @@ app.use(googleAuthRoute);
 app.use(verifyRoute);
 app.use(logoutRoute);
 app.use(indexRoute);
+app.use(shortLinkRoute);
 app.use(aboutRoute);
 app.use(languageRoute);
 app.use(confirmLinkRoute);
 app.use(expiredLinkRoute);
+app.use(dashboardRoute);
 app.use(notFoundController.notFoundPage);

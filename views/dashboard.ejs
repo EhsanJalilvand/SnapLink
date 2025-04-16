@@ -1,0 +1,339 @@
+<%- include('./partials/header.ejs') %>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- منوی کناری -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
+                <div class="position-sticky pt-3">
+                    <div class="d-flex justify-content-between align-items-center px-3 mb-4">
+                        <span class="text-white">منوی مدیریت</span>
+                        <button class="btn btn-sm btn-outline-light d-md-none" id="sidebarToggle">
+                            <i class="bi bi-list"></i>
+                        </button>
+                    </div>
+                    
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active text-white section-link" href="#" data-section="links-section">
+                                <i class="bi bi-link-45deg me-2"></i>
+                                لینک‌های من
+                            </a>
+                        </li>
+                        
+                        <!-- خط جداکننده -->
+                        <li class="border-top my-2"></li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link text-white section-link" href="#" data-section="analytics-section">
+                                <i class="bi bi-bar-chart-line me-2"></i>
+                                آمار و تحلیل‌ها
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- محتوای اصلی -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- بخش لینک‌ها (پیش‌فرض نمایش داده می‌شود) -->
+                <section id="links-section" class="content-section py-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="h4">لینک‌های ایجاد شده</h2>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="bi bi-plus-lg me-1"></i> لینک جدید
+                        </button>
+                    </div>
+
+                    <!-- باکس نمایش جزئیات لینک انتخاب شده -->
+                    <div class="card mb-4 d-none" id="link-details-box">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">عنوان:</label>
+                                        <p class="fw-bold" id="link-title">-</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">لینک اصلی:</label>
+                                        <p><a href="#" id="original-link" target="_blank">-</a></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">لینک کوتاه:</label>
+                                        <p><a href="#" id="short-link" target="_blank">-</a></p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">تعداد کلیک:</label>
+                                        <p id="click-count">0</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- جدول لینک‌ها -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover" id="links-table">
+                                    <thead>
+                                        <tr>
+                                            <th>عنوان</th>
+                                            <th>لینک اصلی</th>
+                                            <th>لینک کوتاه</th>
+                                            <th>وضعیت</th>
+                                            <th>تاریخ ایجاد</th>
+                                            <th>کلیک‌ها</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- داده‌ها از طریق AJAX بارگذاری می‌شوند -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <!-- Pagination -->
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center mt-3" id="pagination">
+                                    <!-- صفحات از طریق AJAX ایجاد می‌شوند -->
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- بخش آمار و تحلیل‌ها (مخفی است) -->
+                <section id="analytics-section" class="content-section py-4" style="display: none;">
+                    <h2 class="h4 mb-4">آمار و تحلیل‌ها</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">تعداد کلیک‌ها در ۷ روز گذشته</h5>
+                                    <canvas id="weeklyChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">پربازدیدترین لینک‌ها</h5>
+                                    <canvas id="topLinksChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">آمار کلی</h5>
+                            <div class="row text-center">
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="p-3 bg-primary bg-opacity-10 rounded">
+                                        <h6 class="text-primary">لینک‌های فعال</h6>
+                                        <h4 id="active-links">0</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="p-3 bg-success bg-opacity-10 rounded">
+                                        <h6 class="text-success">کل کلیک‌ها</h6>
+                                        <h4 id="total-clicks">0</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="p-3 bg-info bg-opacity-10 rounded">
+                                        <h6 class="text-info">میانگین کلیک</h6>
+                                        <h4 id="avg-clicks">0</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="p-3 bg-warning bg-opacity-10 rounded">
+                                        <h6 class="text-warning">لینک‌های منقضی شده</h6>
+                                        <h4 id="expired-links">0</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- اسکریپت‌ها -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // مدیریت منوی کناری
+            $('#sidebarToggle').click(function() {
+                $('#sidebar').toggleClass('collapsed');
+                $('main').toggleClass('expanded');
+            });
+
+            // تغییر بین بخش‌ها
+            $('.section-link').click(function(e) {
+                e.preventDefault();
+                $('.content-section').hide();
+                $('#' + $(this).data('section')).show();
+                $('.section-link').removeClass('active');
+                $(this).addClass('active');
+            });
+
+            // شبیه‌سازی بارگذاری جدول با AJAX
+            function loadLinksTable(page = 1) {
+                // در واقعیت اینجا باید به سرور درخواست AJAX بزنید
+                console.log('Loading page:', page);
+                
+                // شبیه‌سازی داده‌های نمونه
+                const sampleData = [
+                    {
+                        title: "وبلاگ شخصی",
+                        originalLink: "https://myblog.com/posts/123",
+                        shortLink: "https://short.ly/abc123",
+                        status: true,
+                        createdAt: "۱۴۰۲/۰۵/۱۵",
+                        clicks: 125
+                    },
+                    {
+                        title: "پروژه جدید",
+                        originalLink: "https://github.com/myproject",
+                        shortLink: "https://short.ly/xyz456",
+                        status: false,
+                        createdAt: "۱۴۰۲/۰۵/۲۰",
+                        clicks: 78
+                    }
+                ];
+                
+                // پر کردن جدول
+                $('#links-table tbody').empty();
+                sampleData.forEach(link => {
+                    $('#links-table tbody').append(`
+                        <tr class="link-row" data-title="${link.title}" 
+                            data-original="${link.originalLink}" 
+                            data-short="${link.shortLink}"
+                            data-clicks="${link.clicks}">
+                            <td>${link.title}</td>
+                            <td class="text-truncate" style="max-width: 150px;">${link.originalLink}</td>
+                            <td>${link.shortLink}</td>
+                            <td><span class="badge ${link.status ? 'bg-success' : 'bg-danger'}">${link.status ? 'فعال' : 'غیرفعال'}</span></td>
+                            <td>${link.createdAt}</td>
+                            <td>${link.clicks}</td>
+                        </tr>
+                    `);
+                });
+                
+                // شبیه‌سازی pagination
+                $('#pagination').empty();
+                for (let i = 1; i <= 5; i++) {
+                    $('#pagination').append(`
+                        <li class="page-item ${i === page ? 'active' : ''}">
+                            <a class="page-link" href="#" data-page="${i}">${i}</a>
+                        </li>
+                    `);
+                }
+            }
+            
+            // مدیریت کلیک روی ردیف‌های جدول
+            $(document).on('click', '.link-row', function() {
+                $('#link-details-box').removeClass('d-none');
+                $('#link-title').text($(this).data('title'));
+                $('#original-link').text($(this).data('original'));
+                $('#original-link').attr('href', $(this).data('original'));
+                $('#short-link').text($(this).data('short'));
+                $('#short-link').attr('href', $(this).data('short'));
+                $('#click-count').text($(this).data('clicks'));
+            });
+            
+            // مدیریت pagination
+            $(document).on('click', '.page-link', function(e) {
+                e.preventDefault();
+                loadLinksTable($(this).data('page'));
+            });
+            
+            // نمودارها
+            const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
+            const weeklyChart = new Chart(weeklyCtx, {
+                type: 'line',
+                data: {
+                    labels: ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه'],
+                    datasets: [{
+                        label: 'تعداد کلیک‌ها',
+                        data: [65, 59, 80, 81, 56, 55, 40],
+                        backgroundColor: 'rgba(108, 99, 255, 0.2)',
+                        borderColor: 'rgba(108, 99, 255, 1)',
+                        borderWidth: 2,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            const topLinksCtx = document.getElementById('topLinksChart').getContext('2d');
+            const topLinksChart = new Chart(topLinksCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['وبلاگ', 'پروژه', 'درباره ما', 'تماس'],
+                    datasets: [{
+                        data: [35, 25, 20, 20],
+                        backgroundColor: [
+                            'rgba(108, 99, 255, 0.7)',
+                            'rgba(40, 167, 69, 0.7)',
+                            'rgba(255, 193, 7, 0.7)',
+                            'rgba(220, 53, 69, 0.7)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+            
+            // بارگذاری اولیه جدول
+            loadLinksTable();
+            
+            // شبیه‌سازی آمار
+            $('#active-links').text('12');
+            $('#total-clicks').text('1,245');
+            $('#avg-clicks').text('104');
+            $('#expired-links').text('3');
+        });
+    </script>
+    
+    <style>
+        /* استایل‌های ضروری */
+        .sidebar {
+            min-height: 100vh;
+            transition: all 0.3s;
+        }
+        .sidebar.collapsed {
+            margin-right: -250px;
+        }
+        main.expanded {
+            margin-right: 250px;
+        }
+        @media (max-width: 767.98px) {
+            .sidebar {
+                margin-right: -250px;
+            }
+            .sidebar.collapsed {
+                margin-right: 0;
+            }
+            main.expanded {
+                margin-right: 0;
+            }
+        }
+    </style>
