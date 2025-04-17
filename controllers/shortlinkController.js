@@ -23,6 +23,7 @@ exports.generateLink = async (req, res) => {
             relativeLink: code,
             isEnable: true,
             expiredDateTime: null,
+            createdAt:new Date(),
             password: null
         });
         shortLink.save();
@@ -39,10 +40,10 @@ exports.visit = async (req, res) => {
         return;
     const currentDate = new Date();
     console.log(shortLink,currentDate)
-    if(shortLink.expireDateTime<=currentDate)
+    if(shortLink.expireAt<=currentDate)
     {
         console.log('Expired.................')
-       return res.render("expiredLink",{expireDate:shortLink.expireDateTime});
+       return res.render("expiredLink",{expireDate:shortLink.expireAt});
     }
     if(shortLink.password)
     {
@@ -81,10 +82,13 @@ exports.updateExpireDate = async (req, res) => {
     const shortLink = await ShortLink.findById(req.body.id);
     if (shortLink && shortLink.userId != req.user._id)
         return res.status(400).json({ message: 'Input Data Is Not Correct' });
-    shortLink.expireDateTime =req.body.expireDate;
+    shortLink.expireAt =req.body.expireDate;
     shortLink.save();
     res.json({ id: shortLink._id });
 }
+
+
+
 
 
 async function generateShortLink(req, originalLink, callback) {

@@ -14,6 +14,4 @@ router.put('/s/description',shortLinkController.updateDescription);
 router.put('/s/password',shortLinkController.updatePassword);
 router.put('/s/expireDate',shortLinkController.updateExpireDate);
 router.get('/s/:shortId',shortLinkController.visit);
-
-
 module.exports = router;

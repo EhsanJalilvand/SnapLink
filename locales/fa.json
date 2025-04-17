@@ -74,5 +74,6 @@
 	"passwords_must_match": "passwords_must_match",
 	"already_have_account": "already_have_account",
 	"please_enter_password": "please_enter_password",
-	"register_here": "register_here"
+	"register_here": "register_here",
+	"dashboard": "dashboard"
 }

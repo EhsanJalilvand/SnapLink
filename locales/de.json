@@ -77,5 +77,6 @@
 	"disable_date": "disable_date",
 	"cancel": "cancel",
 	"confirm": "confirm",
-	"date_disabled": "date_disabled"
+	"date_disabled": "date_disabled",
+	"dashboard": "dashboard"
 }
