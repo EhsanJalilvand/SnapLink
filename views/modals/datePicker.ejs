@@ -227,6 +227,12 @@ $(function() {
                 },
                 success: (res) => {
                   $('#datePickerModal').modal('hide');
+                  if (typeof window.loadLinksTable === 'function') 
+                  window.loadLinksTable(1);
+                  document.activeElement.blur(); 
+                    setTimeout(() => {
+    $('.modal-backdrop').remove();
+}, 300);
                 },
                 error: (xhr, status, error) => {
 

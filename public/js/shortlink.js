@@ -1,4 +1,7 @@
 let linkId = '';
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const generateBtn = document.getElementById("generateBtn");
     const linkInput = document.getElementById("linkInput");
@@ -29,6 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             success: (res) => {
                 showLink(res.id,originalLink,res.shortLink);
+                if (typeof window.loadLinksTable === 'function') 
+                    window.loadLinksTable(1);
             },
             error: (xhr, status, error) => {
                 generateBtn.disabled = false;
@@ -150,3 +155,5 @@ ${message}
             setTimeout(() => alertDiv.remove(), 150);
         }, 5000);
     }
+
+    

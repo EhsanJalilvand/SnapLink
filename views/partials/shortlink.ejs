@@ -11,7 +11,9 @@
 </div>
 
 <%- include('./formMessage.ejs') %>
-
+<%- include('.././modals/datePicker.ejs') %>
+<%- include('.././modals/linkDescription.ejs') %>
+<%- include('.././modals/linkPassword.ejs') %>
     <div id="resultContainer" class="text-center mt-4" style="display: none;">
         <div class="alert alert-success bg-gradient d-inline-flex align-items-center py-3 px-4 rounded-3 shadow-sm"
             id="shortLink">
@@ -24,7 +26,7 @@
                 data-bs-toggle="modal" data-bs-target="#datePickerModal">
                 <i class="fas fa-calendar me-2"></i>Select Expire Date
             </button>
-            <%- include('.././modals/datePicker.ejs') %>
+
                 <button type="button" class="btn btn-outline-secondary btn-sm"
                     id="setPasswordBtn" data-bs-toggle="modal" data-bs-target="#passwordModal">
                     <i class="fas fa-lock me-2"></i> Set Password
@@ -67,4 +69,4 @@
             </div>
         </div>
     </div>
-    <script src="/js/shortlink.js"></script>
+    <script  src="/js/shortlink.js"></script>
