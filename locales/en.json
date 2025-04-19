@@ -69,8 +69,8 @@
 	"features_subtitle": "Discover the benefits of using our URL shortening service.",
 	"feature1_title": "Fast and Reliable",
 	"feature1_desc": "Generate short links instantly with high reliability and uptime.",
-	"feature2_title": "Analytics Included",
-	"feature2_desc": "Track link clicks and visitor information with built-in analytics.",
+	"feature2_title": "Expiration Date Support",
+	"feature2_desc": "Set expiration to auto-disable your short links after a set time.",
 	"feature3_title": "Secure and Private",
 	"feature3_desc": "Your data is encrypted and we never share your links or stats.",
 	"generatelink_password_object_unknown": "generatelink_password_object_unknown",
@@ -110,5 +110,7 @@
 	"The page you requested could not be found.": "The page you requested could not be found.",
 	"Go Home": "Go Home",
 	"dashboard": "dashboard",
-	"register_password_string_empty": "register_password_string_empty"
+	"register_password_string_empty": "register_password_string_empty",
+	"coming_soon_title": "coming_soon_title",
+	"coming_soon_description": "coming_soon_description"
 }

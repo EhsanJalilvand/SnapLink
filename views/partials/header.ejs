@@ -52,29 +52,29 @@
                     
                     <% if (user) { %>
                         <li class="nav-item">
-                            <span class="nav-link text-dark">
+                            <a class="nav-link text-dark">
                                 <i class="fas fa-user me-1"></i><%= user.displayName %>
-                            </span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-secondary btn-sm ms-lg-2" href="/dashboard">
+                            <a class="nav-link" href="/dashboard">
                                 <i class="fas fa-tachometer-alt me-1"></i><%= __('dashboard')%>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-danger btn-sm ms-lg-2" href="/logout">
+                            <a class="nav-link" href="/logout">
                                 <i class="fas fa-sign-out-alt me-1"></i><%= __('logout')%>
                             </a>
                         </li>
 
                     <% } else { %>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-sm ms-lg-2" href="/login">
+                            <a class="nav-link" href="/login">
                                 <i class="fas fa-sign-in-alt me-1"></i><%= __('login')%>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn  btn-sm ms-lg-2" href="/register">
+                            <a class="nav-link" href="/register">
                                 <i class="fas fa-user-plus me-1"></i><%= __('register')%>
                             </a>
                         </li>

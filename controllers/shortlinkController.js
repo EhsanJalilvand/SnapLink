@@ -27,7 +27,7 @@ exports.generateLink = async (req, res) => {
             password: null
         });
         shortLink.save();
-        res.json({ id: shortLink._id, shortLink: link });
+        res.json({ id: shortLink._id, shortLink: link,isEnable:shortLink.isEnable });
     });
 };
 
@@ -86,7 +86,17 @@ exports.updateExpireDate = async (req, res) => {
     shortLink.save();
     res.json({ id: shortLink._id });
 }
-
+exports.updateStatus = async (req, res) => {
+    console.log(req.body);
+    if (!req.user)
+        return res.status(401).json({ message: 'Please Login into System', redirect: '/login' });
+    const shortLink = await ShortLink.findById(req.body.id);
+    if (shortLink && shortLink.userId != req.user._id)
+        return res.status(400).json({ message: 'Input Data Is Not Correct' });
+    shortLink.isEnable =req.body.isEnable;
+    shortLink.save();
+    res.json({ id: shortLink._id });
+}
 
 
 

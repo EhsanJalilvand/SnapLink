@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 originalLink: originalLink
             },
             success: (res) => {
-                showLink(res.id,originalLink,res.shortLink);
+                showLink(res.id,originalLink,res.shortLink,res.isEnable);
                 if (typeof window.loadLinksTable === 'function') 
                     window.loadLinksTable(1);
             },
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 });
-const showLink = (_linkId,_originalLink,_shortLink) => {
+const showLink = (_linkId,_originalLink,_shortLink,_isEnable) => {
     linkId = _linkId;
     linkInput.value=_originalLink;
     shortLinkText.textContent = _shortLink;
@@ -131,7 +131,14 @@ const showLink = (_linkId,_originalLink,_shortLink) => {
             ${generateBtn.dataset.generateBtn}
         `;
             resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
+            
+            const shortLinkDiv = document.getElementById("shortLink");
+            shortLinkDiv.classList.remove("alert-success", "alert-danger"); // پاک کردن کلاس‌های قبلی
+            if (_isEnable) {
+                shortLinkDiv.classList.add("alert-success");
+            } else {
+                shortLinkDiv.classList.add("alert-danger");
+            }
 }
     // Helper function to show alerts
     const showAlert=(message, type)=> {

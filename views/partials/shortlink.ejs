@@ -1,72 +1,81 @@
-<div dir="ltr" class="input-group mb-3">
-    <input type="url" class="form-control form-control-lg py-3" id="linkInput"
-        placeholder="<%= __('enter_url_placeholder') %>" aria-label="URL" required>
-    <button class="btn btn-primary btn-lg px-4" type="button" id="generateBtn"
-    data-generating="<%= __('generating') %>" 
-    data-generate-btn="<%= __('generate_btn') %>">
-    
-        <i class="fas fa-bolt me-2"></i>
-        <%= __('generate_btn') %>
-    </button>
+<div dir="ltr" class="mb-3 d-flex flex-column flex-md-row align-items-stretch">
+    <div class="flex-fill mb-2 mb-md-0 " style="min-width: 0;">
+        <input type="url" class="form-control form-control-lg  w-100" id="linkInput"
+            placeholder="<%= __('enter_url_placeholder') %>" aria-label="URL" required>
+    </div>
+    <div class="flex-shrink-0">
+        <button class="btn btn-primary btn-lg px-4 w-100 w-md-auto generate-btn" type="button" id="generateBtn"
+            data-generating="<%= __('generating') %>" 
+            data-generate-btn="<%= __('generate_btn') %>">
+            <i class="fas fa-bolt me-2"></i>
+            <%= __('generate_btn') %>
+        </button>
+    </div>
 </div>
+
+
 
 <%- include('./formMessage.ejs') %>
 <%- include('.././modals/datePicker.ejs') %>
 <%- include('.././modals/linkDescription.ejs') %>
 <%- include('.././modals/linkPassword.ejs') %>
-    <div id="resultContainer" class="text-center mt-4" style="display: none;">
-        <div class="alert alert-success bg-gradient d-inline-flex align-items-center py-3 px-4 rounded-3 shadow-sm"
-            id="shortLink">
-            <i class="fas fa-link me-3 fs-4"></i>
-            <span id="shortLinkText" class="fw-bold"></span>
-        </div>
 
-        <div class="d-flex justify-content-center gap-3 mt-4">
-            <button type="button" class="btn btn-outline-secondary btn-sm" id="setExpireDateBtn"
-                data-bs-toggle="modal" data-bs-target="#datePickerModal">
-                <i class="fas fa-calendar me-2"></i>Select Expire Date
-            </button>
+<div dir="ltr" id="resultContainer" class="text-center mt-4" style="display: none;">
+    <div class="alert alert-success bg-gradient d-inline-flex align-items-center py-3 px-4 rounded-3 shadow-sm"
+        id="shortLink">
+        <i class="fas fa-link me-3 fs-4"></i>
+        <span id="shortLinkText" class="fw-bold"></span>
+    </div>
 
-                <button type="button" class="btn btn-outline-secondary btn-sm"
-                    id="setPasswordBtn" data-bs-toggle="modal" data-bs-target="#passwordModal">
-                    <i class="fas fa-lock me-2"></i> Set Password
-                </button>
-                <button type="button" class="btn btn-outline-secondary btn-sm"
-                    id="setDescriptionBtn" data-bs-toggle="modal"
-                    data-bs-target="#descriptionModal">
-                    <i class="fas fa-info-circle me-2"></i> Add Description
-                </button>
-                <button class="btn btn-outline-primary px-4 py-2" id="copyBtn">
-                    <i class="fas fa-copy me-2"></i>
-                    <%= __('copy_btn') %>
-                </button>
-                <a href="#" class="btn btn-primary px-4 py-2" id="visitBtn" target="_blank">
-                    <i class="fas fa-external-link-alt me-2"></i>
-                    <%= __('visit_btn') %>
+    <div class="d-flex flex-column flex-md-row justify-content-center gap-3 mt-4">
+        <button type="button" class="btn btn-outline-secondary btn-sm mb-2 mb-md-0" id="setExpireDateBtn"
+            data-bs-toggle="modal" data-bs-target="#datePickerModal">
+            <i class="fas fa-calendar me-2"></i>Select Expire Date
+        </button>
+
+        <button type="button" class="btn btn-outline-secondary btn-sm mb-2 mb-md-0"
+            id="setPasswordBtn" data-bs-toggle="modal" data-bs-target="#passwordModal">
+            <i class="fas fa-lock me-2"></i> Set Password
+        </button>
+
+        <button type="button" class="btn btn-outline-secondary btn-sm mb-2 mb-md-0"
+            id="setDescriptionBtn" data-bs-toggle="modal"
+            data-bs-target="#descriptionModal">
+            <i class="fas fa-info-circle me-2"></i> Add Description
+        </button>
+
+        <button class="btn btn-outline-primary px-4 py-2 mb-2 mb-md-0" id="copyBtn">
+            <i class="fas fa-copy me-2"></i>
+            <%= __('copy_btn') %>
+        </button>
+
+        <a href="#" class="btn btn-primary px-4 py-2" id="visitBtn" target="_blank">
+            <i class="fas fa-external-link-alt me-2"></i>
+            <%= __('visit_btn') %>
+        </a>
+    </div>
+
+    <div class="mt-4">
+        <div class="d-flex align-items-center justify-content-center">
+            <span class="me-3">
+                <%= __('share_on') %>:
+            </span>
+            <div class="social-share">
+                <a href="#" class="btn btn-sm btn-outline-secondary me-2 rounded-circle"
+                    data-network="twitter">
+                    <i class="fab fa-twitter"></i>
                 </a>
-
-        </div>
-
-        <div class="mt-4">
-            <div class="d-flex align-items-center justify-content-center">
-                <span class="me-3">
-                    <%= __('share_on') %>:
-                </span>
-                <div class="social-share">
-                    <a href="#" class="btn btn-sm btn-outline-secondary me-2 rounded-circle"
-                        data-network="twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-outline-secondary me-2 rounded-circle"
-                        data-network="telegram">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-outline-secondary me-2 rounded-circle"
-                        data-network="whatsapp">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                </div>
+                <a href="#" class="btn btn-sm btn-outline-secondary me-2 rounded-circle"
+                    data-network="telegram">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="#" class="btn btn-sm btn-outline-secondary me-2 rounded-circle"
+                    data-network="whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
             </div>
         </div>
     </div>
-    <script  src="/js/shortlink.js"></script>
+</div>
+
+<script src="/js/shortlink.js"></script>

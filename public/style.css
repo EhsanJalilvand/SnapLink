@@ -1,193 +1,36 @@
-:root {
-    --primary-color: #4e73df;
-    --secondary-color: #f8f9fa;
-    --text-color: #5a5c69;
-}
 
-/* General Styles */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--text-color);
+.url-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-}
+    gap: 10px;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
 
-/* Navbar Styles */
-.navbar {
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    padding: 0.8rem 0;
-}
+  .url-input {
+    padding: 12px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
 
-.navbar-brand {
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: var(--primary-color) !important;
-}
-
-.nav-link {
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.navbar-nav .nav-link {
-    color: var(--text-color);
-}
-
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-    color: var(--primary-color);
-}
-
-/* Card Styles */
-.card {
-    border: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-.card-header {
-    font-weight: 600;
-}
-
-/* Form Styles */
-.form-control {
-    padding: 0.75rem 1rem;
-    border-radius: 0.375rem;
-    border: 1px solid #d1d3e2;
-}
-
-.form-control:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
-}
-
-.btn {
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.375rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-/* Footer Styles */
-footer {
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-}
-
-footer a {
-    transition: color 0.3s ease;
-}
-
-footer a:hover {
-    color: #a7c4ff !important;
-}
-
-.social-links a {
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
-
-.social-links a:hover {
-    transform: translateY(-3px);
-}
-
-/* Main Page Styles */
-.bg-gradient {
-    background: linear-gradient(135deg, rgba(78,115,223,0.1) 0%, rgba(78,115,223,0.2) 100%);
-}
-
-/* Input Group */
-.input-group .form-control {
-    border-top-right-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-}
-
-.input-group .btn {
-    border-top-left-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
-}
-
-/* Icon Box */
-.icon-box {
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.card:hover .icon-box {
-    background-color: var(--primary-color) !important;
-    color: white !important;
-    transform: rotate(10deg) scale(1.1);
-}
-
-/* Social Share Buttons */
-.social-share .btn {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Animations */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-#generateBtn:not(:disabled) {
-    animation: pulse 2s infinite;
-}
-
-#generateBtn:disabled {
-    opacity: 0.8;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .display-4 {
-        font-size: 2.5rem;
+ 
+  @media (min-width: 768px) {
+    .url-container {
+      flex-direction: row;
     }
-    
-    .input-group .btn {
-        padding-left: 1rem;
-        padding-right: 1rem;
+  
+    .url-input {
+      flex: 1;
     }
-}
-
-
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .navbar-nav {
-        padding-top: 1rem;
+  
+    .generate-btn {
+      width: auto;
+      margin-left: 10px;
     }
-    
-    .nav-item {
-        margin-bottom: 0.5rem;
-    }
-    
-    footer .row > div {
-        margin-bottom: 1.5rem;
-    }
-}
-
-/* Animation for form validation */
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-}
-
-.is-invalid {
-    animation: shake 0.5s;
-    border-color: #e74a3b !important;
-}
+  }
+  

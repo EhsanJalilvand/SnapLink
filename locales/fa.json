@@ -75,5 +75,7 @@
 	"already_have_account": "already_have_account",
 	"please_enter_password": "please_enter_password",
 	"register_here": "register_here",
-	"dashboard": "dashboard"
+	"dashboard": "dashboard",
+	"coming_soon_title": "coming_soon_title",
+	"coming_soon_description": "coming_soon_description"
 }
