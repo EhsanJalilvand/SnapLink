@@ -38,8 +38,15 @@ exports.visit = async (req, res) => {
     const shortLink = await ShortLink.findOne({ relativeLink: shortId });
     if (!shortLink)
         return;
+    if(!shortLink.isEnable)
+        {
+           return res.render("disabledLink");
+        }
     const currentDate = new Date();
-    console.log(shortLink,currentDate)
+    if(shortLink.expireAt<=currentDate)
+        {
+           return res.render("expiredLink",{expireDate:shortLink.expireAt});
+        }
     if(shortLink.expireAt<=currentDate)
     {
        return res.render("expiredLink",{expireDate:shortLink.expireAt});

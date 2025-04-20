@@ -7,7 +7,10 @@ const userSchema = new schmea(
         email: { type: String, require: true },
         password: String,
         isVerified:{type:Boolean,require:true,default:false},
-        verificationToken: String
+        verificationToken: String,
+        resetCode:{type:String},
+        resetCodeExpire:{type:Date,require:false},
+        createdAt:{type:Date,require:false}
     });
 const User=mongoose.model('User',userSchema);
 

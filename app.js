@@ -12,6 +12,7 @@ const notFoundController=require('./controllers/notFoundController')
 const loginRoute = require('./routes/auth/login');
 const registerRoute = require('./routes/auth/register');
 const googleAuthRoute = require('./routes/auth/googleAuth');
+const forgotPasswordRoute = require('./routes/auth/forgotPassword')
 const verifyRoute = require('./routes/auth/verify');
 const logoutRoute = require('./routes/auth/logout');
 const indexRoute = require('./routes/index')
@@ -66,6 +67,7 @@ mongoose.connect(process.env.MONGO_URI)
 app.use(loginRoute);
 app.use(registerRoute);
 app.use(googleAuthRoute);
+app.use(forgotPasswordRoute);
 app.use(verifyRoute);
 app.use(logoutRoute);
 app.use(indexRoute);

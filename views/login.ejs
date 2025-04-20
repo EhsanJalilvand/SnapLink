@@ -4,29 +4,46 @@
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
             <div class="card border-0 shadow-lg rounded-3 overflow-hidden">
+                
                 <div class="card-header bg-primary text-white py-3">
                     <h3 class="text-center mb-0"><%= title %></h3>
                 </div>
+
                 <div class="card-body p-4">
+                
                     <%- include('./partials/formMessage.ejs') %>
-                    
+
+                  
                     <form action="/login" method="POST" class="needs-validation" novalidate>
+                      
                         <div class="mb-3">
-                            <label for="email" class="form-label"><i class="fas fa-envelope me-2"></i><%= __('login_email') %></label>
+                            <label for="email" class="form-label"><%= __('login_email') %></label>
                             <input type="email" id="email" name="email" class="form-control py-2" required value="<%= formData.email %>">
                             <div class="invalid-feedback"><%= __('please_enter_valid_email') %></div>
                         </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label"><i class="fas fa-lock me-2"></i><%= __('login_password') %></label>
+
+                       
+                        <div class="mb-1">
+                            <label for="password" class="form-label"><%= __('login_password') %></label>
                             <input type="password" id="password" name="password" class="form-control py-2" required>
                             <div class="invalid-feedback"><%= __('please_enter_password') %></div>
                         </div>
+
+                      
+                        <div class="d-flex justify-content-end mb-3">
+                            <a href="/forgot-password" class="text-primary text-decoration-none fw-semibold">
+                                <%= __('forgot_password_here') %>
+                            </a>
+                        </div>
+
+                       
                         <div class="d-grid mb-3">
                             <button type="submit" class="btn btn-primary py-2">
                                 <i class="fas fa-sign-in-alt me-2"></i><%= __('login_login') %>
                             </button>
                         </div>
                     </form>
+
                     
                     <div class="text-center mb-3">
                         <div class="d-grid">
@@ -35,10 +52,14 @@
                             </a>
                         </div>
                     </div>
-                    
-                    <div class="text-center">
-                        <p class="mb-0"><%= __('login_dontHaveAnAccount') %> 
-                            <a href="/register" class="text-primary text-decoration-none"><%= __('register_here') %></a>
+
+                  
+                    <div class="text-center mt-3">
+                        <p class="mb-0">
+                            <%= __('login_dontHaveAnAccount') %>
+                            <a href="/register" class="text-primary text-decoration-none fw-semibold">
+                                <%= __('register_here') %>
+                            </a>
                         </p>
                     </div>
                 </div>

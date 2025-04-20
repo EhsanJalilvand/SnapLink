@@ -18,7 +18,8 @@ exports.register = async (req, res) => {
             email,
             isVerified: false,
             password: hashedPassword,
-            verificationToken
+            verificationToken,
+            createdAt:Date.now()
         });
 
         await newUser.save();
