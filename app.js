@@ -39,7 +39,7 @@ const setLocals = require('./middlewares/setLocals');
 
 
 app.use(require('express-session')({
-    secret: 'your_secret_key',
+    secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -57,8 +57,8 @@ app.use(setLocals());
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log('MongoDB connected');
-        app.listen(3000);
-        console.log('Listen Port 3000');
+        app.listen( process.env.PORT);
+        console.log(`Listen Port ${ process.env.PORT}`);
     }
     )
     .catch(err => console.log(err));

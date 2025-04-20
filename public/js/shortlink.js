@@ -133,7 +133,7 @@ const showLink = (_linkId,_originalLink,_shortLink,_isEnable) => {
             resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
             
             const shortLinkDiv = document.getElementById("shortLink");
-            shortLinkDiv.classList.remove("alert-success", "alert-danger"); // پاک کردن کلاس‌های قبلی
+            shortLinkDiv.classList.remove("alert-success", "alert-danger"); 
             if (_isEnable) {
                 shortLinkDiv.classList.add("alert-success");
             } else {

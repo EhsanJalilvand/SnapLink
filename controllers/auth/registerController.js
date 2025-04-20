@@ -23,9 +23,9 @@ exports.register = async (req, res) => {
 
         await newUser.save();
 
-        const verificationLink = `http://localhost:3000/verify/${verificationToken}`;
+        const verificationLink =`${req.protocol}://${req.get('host')}/verify/${verificationToken}`;
         await sendEmail(email, 'Verify Your Email', `Click here to verify: ${verificationLink}`);
-        console.info(`emai Sended to ${email}`)
+        console.info(`emai Sended to ${email}`);
         req.flash('message', 'Registration successful! Check your email for verification link.');
         res.redirect('/register');
     } catch (err) {

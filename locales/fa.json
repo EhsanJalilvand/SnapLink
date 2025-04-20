@@ -1,4 +1,5 @@
 {
+	"404": "404",
 	"Home": "خانه",
 	"about": "درباره ما",
 	"logout": "خروج",
@@ -77,5 +78,8 @@
 	"register_here": "register_here",
 	"dashboard": "dashboard",
 	"coming_soon_title": "coming_soon_title",
-	"coming_soon_description": "coming_soon_description"
+	"coming_soon_description": "coming_soon_description",
+	"404 - Page Not Found": "404 - Page Not Found",
+	"The page you requested could not be found.": "The page you requested could not be found.",
+	"Go Home": "Go Home"
 }

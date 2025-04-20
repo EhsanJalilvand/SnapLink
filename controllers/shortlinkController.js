@@ -42,7 +42,6 @@ exports.visit = async (req, res) => {
     console.log(shortLink,currentDate)
     if(shortLink.expireAt<=currentDate)
     {
-        console.log('Expired.................')
        return res.render("expiredLink",{expireDate:shortLink.expireAt});
     }
     if(shortLink.password)

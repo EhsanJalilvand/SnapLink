@@ -13,7 +13,6 @@ exports.ConfirmLink = async (req, res) => {
         const isMatch = await bcrypt.compare(password, shortLink.password);
         if (isMatch)
             return res.redirect(shortLink.originalLink);
-        console.log('incorrect Password!');
 
     } catch (err) {
         console.error(err);
