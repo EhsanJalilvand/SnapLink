@@ -1,4 +1,5 @@
 {
+	"404": "404",
 	"Home": "Startseite",
 	"about": "Über uns",
 	"logout": "Abmelden",
@@ -92,5 +93,8 @@
 	"date_disabled": "date_disabled",
 	"dashboard": "dashboard",
 	"forgot_password_here": "forgot_password_here",
-	"new_btn": "new_btn"
+	"new_btn": "new_btn",
+	"404 - Page Not Found": "404 - Page Not Found",
+	"The page you requested could not be found.": "The page you requested could not be found.",
+	"Go Home": "Go Home"
 }

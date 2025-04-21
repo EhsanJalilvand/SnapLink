@@ -32,12 +32,8 @@
 	"register_password_any_required": "Password is required",
 	"register_confirmPassword_any_only": "Confirm password must match the password",
 	"register_confirmPassword_any_required": "Confirm password is required",
-	"displayname_string_min": "displayname_string_min",
-	"confirmPassword_any_only": "confirmPassword_any_only",
-	"password_string_min": "password_string_min",
-	"register'_'displayname'_'string_min": "register'_'displayname'_'string_min",
-	"register'_'password'_'string_min": "register'_'password'_'string_min",
-	"register'_'confirmPassword'_'any_only": "register'_'confirmPassword'_'any_only",
+	"register_password_string_empty": "Password cannot be empty",
+  
 	"contact": "contact",
 	"quick_links": "quick_links",
 	"privacy": "privacy",
@@ -74,7 +70,7 @@
 	"feature2_desc": "Set expiration to auto-disable your short links after a set time.",
 	"feature3_title": "Secure and Private",
 	"feature3_desc": "Your data is encrypted and we never share your links or stats.",
-
+  
 	"about_title": "About SnapLink",
 	"about_subtitle": "A simple yet powerful URL shortener service to manage your links",
 	"about_feature1_title": "Free",
@@ -87,8 +83,7 @@
 	"about_feature4_text": "Manage all your links in one place with a user-friendly dashboard",
 	"about_tech_title": "Built with",
 	"about_cta_button": "Try it now",
-
-
+  
 	"generatelink_password_object_unknown": "generatelink_password_object_unknown",
 	"generatelink_title_object_unknown": "generatelink_title_object_unknown",
 	"generatelink_description_object_unknown": "generatelink_description_object_unknown",
@@ -126,22 +121,22 @@
 	"The page you requested could not be found.": "The page you requested could not be found.",
 	"Go Home": "Go Home",
 	"dashboard": "dashboard",
-	"register_password_string_empty": "register_password_string_empty",
-	"coming_soon_title": "coming_soon_title",
-	"coming_soon_description": "coming_soon_description",
-	"forgot_password": "forgot_password",
-	"reset_password": "reset_password",
-	"forgot_send_code": "forgot_send_code",
-	"back_to_login": "back_to_login",
-	"reset_code": "reset_code",
-	"please_enter_code": "please_enter_code",
-	"new_password": "new_password",
-	"confirm_password": "confirm_password",
-	"please_confirm_password": "please_confirm_password",
-	"reset_password_btn": "reset_password_btn",
-	"login_forgot_password": "login_forgot_password",
-	"forgot_password_here": "forgot_password_here",
+	"coming_soon_title": "Coming Soon",
+	"coming_soon_description": "This feature is under development. Stay tuned!",
+	"forgot_password": "Forgot Password",
+	"reset_password": "Reset Password",
+	"forgot_send_code": "Send Reset Code",
+	"back_to_login": "Back to Login",
+	"reset_code": "Reset Code",
+	"please_enter_code": "Please enter the code sent to your email",
+	"new_password": "New Password",
+	"confirm_password": "Confirm Password",
+	"please_confirm_password": "Please confirm your password",
+	"reset_password_btn": "Reset Password",
+	"login_forgot_password": "Forgot your password?",
+	"forgot_password_here": "Reset it here",
 	"Link Disabled": "Link Disabled",
 	"This link has been disabled and cannot be accessed.": "This link has been disabled and cannot be accessed.",
 	"If you believe this is an error, please contact support.": "If you believe this is an error, please contact support."
-}
+  }
+  
