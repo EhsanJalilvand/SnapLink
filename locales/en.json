@@ -61,6 +61,7 @@
 	"index_subtitle": "Paste your long URL and click the button to generate a short version instantly.",
 	"enter_url_placeholder": "Enter your long URL here...",
 	"generate_btn": "Generate Link",
+	"new_btn": "New Link",
 	"generating": "Generating...",
 	"copy_btn": "Copy",
 	"visit_btn": "Visit",
@@ -128,4 +129,5 @@
 	"Link Disabled": "Link Disabled",
 	"This link has been disabled and cannot be accessed.": "This link has been disabled and cannot be accessed.",
 	"If you believe this is an error, please contact support.": "If you believe this is an error, please contact support."
+	
 }

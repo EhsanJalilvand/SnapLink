@@ -4,6 +4,7 @@ let linkId = '';
 
 document.addEventListener("DOMContentLoaded", function () {
     const generateBtn = document.getElementById("generateBtn");
+    const newBtn = document.getElementById("newBtn");
     const linkInput = document.getElementById("linkInput");
     const resultContainer = document.getElementById("resultContainer");
     const shortLinkText = document.getElementById("shortLinkText");
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
         ${generateBtn.dataset.generating}
     `;
-    
+
         $.ajax({
             url: '/generatelink',
             method: 'POST',
@@ -31,13 +32,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 originalLink: originalLink
             },
             success: (res) => {
-                showLink(res.id,originalLink,res.shortLink,res.isEnable);
-                if (typeof window.loadLinksTable === 'function') 
+                showLink(res.id, originalLink, res.shortLink, res.isEnable, false);
+                if (typeof window.loadLinksTable === 'function')
                     window.loadLinksTable(1);
             },
             error: (xhr, status, error) => {
                 generateBtn.disabled = false;
-                   generateBtn.innerHTML = `
+                generateBtn.innerHTML = `
                 <i class="fas fa-bolt me-2"></i>
                 ${generateBtn.dataset.generateBtn}
             `;
@@ -57,7 +58,14 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
-
+    newBtn.addEventListener('click', function () {
+        linkInput.disabled = false;
+        linkInput.value = '';
+        generateBtn.style.display = "inline-block";
+        newBtn.style.display = "none";
+        resultContainer.style.display = "none";
+        linkInput.style.backgroundColor = "";
+    });
     setDescriptionBtn.addEventListener('click', () => {
         setLinkIdForDescriptionModal(linkId);
 
@@ -118,49 +126,60 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 });
-const showLink = (_linkId,_originalLink,_shortLink,_isEnable) => {
+const showLink = (_linkId, _originalLink, _shortLink, _isEnable, _canAddNewLink) => {
     linkId = _linkId;
-    linkInput.value=_originalLink;
+    linkInput.value = _originalLink;
     shortLinkText.textContent = _shortLink;
-            linkId = _linkId;
-            visitBtn.href = _shortLink;
-            resultContainer.style.display = "block";
-            generateBtn.disabled = false;
-            generateBtn.innerHTML = `
+    linkId = _linkId;
+    visitBtn.href = _shortLink;
+    resultContainer.style.display = "block";
+    if (_canAddNewLink) {
+        linkInput.disabled = false;
+        generateBtn.style.display = "inline-block";
+        newBtn.style.display = "none";
+        linkInput.style.backgroundColor = "";
+    }
+    else {
+        linkInput.disabled = true;
+        generateBtn.style.display = "none";
+        newBtn.style.display = "inline-block";
+        linkInput.style.backgroundColor = "#f0f0f0";
+    }
+    generateBtn.disabled = false;
+    generateBtn.innerHTML = `
             <i class="fas fa-bolt me-2"></i>
             ${generateBtn.dataset.generateBtn}
         `;
-            resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
-            const shortLinkDiv = document.getElementById("shortLink");
-            shortLinkDiv.classList.remove("alert-success", "alert-danger"); 
-            if (_isEnable) {
-                shortLinkDiv.classList.add("alert-success");
-            } else {
-                shortLinkDiv.classList.add("alert-danger");
-            }
-}
-    // Helper function to show alerts
-    const showAlert=(message, type)=> {
-        // Remove any existing alerts first
-        document.querySelectorAll('.alert-dismissible').forEach(alert => {
-            alert.remove();
-        });
+    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-        const alertDiv = document.createElement('div');
-        alertDiv.className = `alert alert-${type} alert-dismissible fade show mt-3`;
-        alertDiv.innerHTML = `
+    const shortLinkDiv = document.getElementById("shortLink");
+    shortLinkDiv.classList.remove("alert-success", "alert-danger");
+    if (_isEnable) {
+        shortLinkDiv.classList.add("alert-success");
+    } else {
+        shortLinkDiv.classList.add("alert-danger");
+    }
+}
+// Helper function to show alerts
+const showAlert = (message, type) => {
+    // Remove any existing alerts first
+    document.querySelectorAll('.alert-dismissible').forEach(alert => {
+        alert.remove();
+    });
+
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type} alert-dismissible fade show mt-3`;
+    alertDiv.innerHTML = `
 ${message}
 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 `;
 
-        const container = document.querySelector('.card-body');
-        container.insertBefore(alertDiv, container.children[2]);
+    const container = document.querySelector('.card-body');
+    container.insertBefore(alertDiv, container.children[2]);
 
-        setTimeout(() => {
-            alertDiv.classList.remove('show');
-            setTimeout(() => alertDiv.remove(), 150);
-        }, 5000);
-    }
+    setTimeout(() => {
+        alertDiv.classList.remove('show');
+        setTimeout(() => alertDiv.remove(), 150);
+    }, 5000);
+}
 
-    
