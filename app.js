@@ -8,21 +8,29 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser'); 
 const { i18n, setLanguage } = require('./language');
-const notFoundController=require('./controllers/notFoundController')
+
+// Controllers and Routes
+const notFoundController = require('./controllers/notFoundController');
 const loginRoute = require('./routes/auth/login');
 const registerRoute = require('./routes/auth/register');
 const googleAuthRoute = require('./routes/auth/googleAuth');
-const forgotPasswordRoute = require('./routes/auth/forgotPassword')
+const forgotPasswordRoute = require('./routes/auth/forgotPassword');
 const verifyRoute = require('./routes/auth/verify');
 const logoutRoute = require('./routes/auth/logout');
-const indexRoute = require('./routes/index')
-const shortLinkRoute = require('./routes/shortLink')
-const aboutRoute = require('./routes/about')
-const languageRoute=require('./routes/language')
-const confirmLinkRoute = require('./routes/confirmLink')
-const expiredLinkRoute = require('./routes/expiredLink')
-const dashboardRoute = require('./routes/dashboard')
+const indexRoute = require('./routes/index');
+const shortLinkRoute = require('./routes/shortLink');
+const aboutRoute = require('./routes/about');
+const languageRoute = require('./routes/language');
+const confirmLinkRoute = require('./routes/confirmLink');
+const expiredLinkRoute = require('./routes/expiredLink');
+const dashboardRoute = require('./routes/dashboard');
+
+// Initialize Express App
 const app = express();
+
+// Middleware setup
+require('./middlewares/authentication');
+const setLocals = require('./middlewares/setLocals');
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -34,11 +42,7 @@ app.use(i18n.init);
 app.use(setLanguage);
 app.set('view engine', 'ejs');
 
-require('./middlewares/authentication');
-const setLocals = require('./middlewares/setLocals');
-
-
-
+// Session and Passport setup
 app.use(require('express-session')({
     secret: process.env.SECRET_KEY,
     resave: false,
@@ -53,17 +57,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(setLocals());
 
-
-
+// MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log('MongoDB connected');
-        app.listen( process.env.PORT);
-        console.log(`Listen Port ${ process.env.PORT}`);
-    }
-    )
+        app.listen(process.env.PORT);
+        console.log(`Listen Port ${process.env.PORT}`);
+    })
     .catch(err => console.log(err));
 
+// Routes setup
 app.use(loginRoute);
 app.use(registerRoute);
 app.use(googleAuthRoute);
@@ -77,4 +80,7 @@ app.use(languageRoute);
 app.use(confirmLinkRoute);
 app.use(expiredLinkRoute);
 app.use(dashboardRoute);
+
+// 404 Handler
 app.use(notFoundController.notFoundPage);
+
