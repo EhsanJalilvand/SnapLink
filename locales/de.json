@@ -71,6 +71,18 @@
 	"feature2_desc": "Verfolge Klicks und Besucherinformationen mit integrierter Analysefunktion.",
 	"feature3_title": "Sicher und privat",
 	"feature3_desc": "Deine Daten sind verschlüsselt und wir teilen deine Links oder Statistiken niemals.",
+	"about_title": "Über SnapLink",
+	"about_subtitle": "Ein einfacher, aber leistungsstarker URL-Kürzungsdienst zur Verwaltung deiner Links",
+	"about_feature1_title": "Kostenlos",
+	"about_feature1_text": "Viele Funktionen sind kostenlos und in Zukunft werden weitere kostenlose Features hinzugefügt",
+	"about_feature2_title": "Sichere Links",
+	"about_feature2_text": "Füge deinen Links ganz einfach ein Passwort hinzu, um den Zugriff zu beschränken",
+	"about_feature3_title": "Ablaufkontrolle",
+	"about_feature3_text": "Lege ein Ablaufdatum für deine Links fest, um temporäre Links zu erstellen",
+	"about_feature4_title": "Einfaches Dashboard",
+	"about_feature4_text": "Verwalte alle deine Links an einem Ort mit einem benutzerfreundlichen Dashboard",
+	"about_tech_title": "Erstellt mit",
+	"about_cta_button": "Jetzt ausprobieren",
 	"datepicker_title": "datepicker_title",
 	"close": "close",
 	"select_date_placeholder": "select_date_placeholder",
@@ -78,5 +90,7 @@
 	"cancel": "cancel",
 	"confirm": "confirm",
 	"date_disabled": "date_disabled",
-	"dashboard": "dashboard"
+	"dashboard": "dashboard",
+	"forgot_password_here": "forgot_password_here",
+	"new_btn": "new_btn"
 }

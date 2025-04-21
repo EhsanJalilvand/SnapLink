@@ -74,6 +74,21 @@
 	"feature2_desc": "Set expiration to auto-disable your short links after a set time.",
 	"feature3_title": "Secure and Private",
 	"feature3_desc": "Your data is encrypted and we never share your links or stats.",
+
+	"about_title": "About SnapLink",
+	"about_subtitle": "A simple yet powerful URL shortener service to manage your links",
+	"about_feature1_title": "Free",
+	"about_feature1_text": "Many of its features are free, and more free options will be added in the future",
+	"about_feature2_title": "Secure Links",
+	"about_feature2_text": "Easily add passwords to your links to restrict access",
+	"about_feature3_title": "Expiration Control",
+	"about_feature3_text": "Set an expiration date for your links to create temporary ones",
+	"about_feature4_title": "Simple Dashboard",
+	"about_feature4_text": "Manage all your links in one place with a user-friendly dashboard",
+	"about_tech_title": "Built with",
+	"about_cta_button": "Try it now",
+
+
 	"generatelink_password_object_unknown": "generatelink_password_object_unknown",
 	"generatelink_title_object_unknown": "generatelink_title_object_unknown",
 	"generatelink_description_object_unknown": "generatelink_description_object_unknown",
@@ -129,5 +144,4 @@
 	"Link Disabled": "Link Disabled",
 	"This link has been disabled and cannot be accessed.": "This link has been disabled and cannot be accessed.",
 	"If you believe this is an error, please contact support.": "If you believe this is an error, please contact support."
-	
 }

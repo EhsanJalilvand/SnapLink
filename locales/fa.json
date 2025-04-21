@@ -55,7 +55,21 @@
 	"feature2_desc": "کلیک‌ها و اطلاعات بازدیدکنندگان را با ابزار تحلیل داخلی ردیابی کنید.",
 	"feature3_title": "ایمن و خصوصی",
 	"feature3_desc": "اطلاعات شما رمزنگاری می‌شود و ما هرگز لینک‌ها یا آمار شما را به اشتراک نمی‌گذاریم.",
-	"contact": "contact",
+
+	"about_title": "درباره اسنپ لینک",
+	"about_subtitle": "یک سرویس کوتاه‌کننده لینک ساده اما قدرتمند برای مدیریت لینک های شما",
+	"about_feature1_title": "رایگان",
+	"about_feature1_text": "خیلی از امکاناتش رایگان هست و در آینده قسمت های رایگان دیگه ای هم اضافه میشه",
+	"about_feature2_title": "لینک‌های امن",
+	"about_feature2_text": "براحتی بر روی لینک های خود پسورد بذارید تا دسترسیشو محدود کنید",
+	"about_feature3_title": "کنترل انقضا",
+	"about_feature3_text": "برای لینک‌هاتون تاریخ انقضا تنظیم کنین تا لینک های موقت بسازید",
+	"about_feature4_title": "داشبورد ساده",
+	"about_feature4_text": "همه لینک‌هاتون رو توی یک جا با داشبورد کاربرپسند مدیریت کنید",
+	"about_tech_title": "ساخته شده با",
+	"about_cta_button": "الان امتحانش کن",
+
+
 	"quick_links": "quick_links",
 	"privacy": "privacy",
 	"terms": "terms",
@@ -81,5 +95,6 @@
 	"coming_soon_description": "coming_soon_description",
 	"404 - Page Not Found": "404 - Page Not Found",
 	"The page you requested could not be found.": "The page you requested could not be found.",
-	"Go Home": "Go Home"
+	"Go Home": "Go Home",
+	"contact": "contact"
 }
