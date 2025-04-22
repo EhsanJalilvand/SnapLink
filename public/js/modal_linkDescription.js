@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     $('.modal-backdrop').remove();
                 }, 300);
+                showAlert(`New Description Added`, 'success');
             },
             error: (xhr) => {
                 // If unauthorized, redirect to login or provided path

@@ -40,7 +40,7 @@
                 <%= __('This link has expired and is no longer available.') %>
             </p>
             <p class="text-muted small mb-4">
-                <%= __('Expired on:') %> <%= expireDate.toLocaleDateString() %>
+                <%= __('Expired on:') %> <%= expireDate?.toLocaleDateString() %>
             </p>
             <a href="/" class="btn btn-home">
                 <i class="bi bi-house-door"></i> <%= __('Go to Homepage') %>

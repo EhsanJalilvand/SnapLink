@@ -7,10 +7,9 @@ const setLocals = () => {
         // Retrieve flash messages (if any) and assign them to locals
         if (!res.locals.message)
             res.locals.message = req.flash('message');
-
-        if (!res.locals.error)
+        if (!res.locals.error) {
             res.locals.error = req.flash('error');
-
+        }
         // Set a default page title based on the last part of the URL path
         if (!res.locals.title) {
             let filename = req.path.split('/').pop() || 'index';
@@ -27,7 +26,7 @@ const setLocals = () => {
             req.flash('error', '');
         }
 
-        next(); 
+        next();
     }
 };
 

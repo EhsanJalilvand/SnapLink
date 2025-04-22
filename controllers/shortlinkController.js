@@ -43,10 +43,10 @@ exports.visit = async (req, res) => {
     
     const currentDate = new Date();
     //Check if the short link has expired
-    if (shortLink.expireAt <= currentDate) return res.render("expiredLink", { expireDate: shortLink.expireAt });
+    if (shortLink.expireAt && shortLink.expireAt <= currentDate) return res.render("expiredLink", { expireDate: shortLink.expireAt });
     
     //Check If the short link is protected by a password
-    if (shortLink.password) return res.render("confirmLink", { linkId: shortLink._id });
+    if (shortLink.password && shortLink.password) return res.render("confirmLink", { linkId: shortLink._id });
     
     //redirect to the original link
     res.redirect(shortLink.originalLink);
@@ -68,6 +68,9 @@ exports.updatePassword = async (req, res) => {
     if (!req.user) return res.status(401).json({ message: 'Please Login into System', redirect: '/login' });
     const shortLink = await ShortLink.findById(req.body.id);
     if (shortLink && shortLink.userId != req.user._id) return res.status(400).json({ message: 'Input Data Is Not Correct' });
+    if(!req.body.password)
+        shortLink.password=null;
+    else    
     shortLink.password = await bcrypt.hash(req.body.password, 10);
     shortLink.save();
     res.json({ id: shortLink._id });

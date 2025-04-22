@@ -91,6 +91,7 @@ $(function () {
                 setTimeout(() => {
                     $('.modal-backdrop').remove();
                 }, 300);
+                showAlert(`Expire Date Set to ${selectedDate}`, 'success');
             },
             error: (xhr) => {
                 if (xhr && xhr.status === 401) {

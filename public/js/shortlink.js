@@ -174,7 +174,7 @@ ${message}
 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 `;
 
-    const container = document.querySelector('.card-body');
+    const container = document.querySelector('#shortLinkMessage');
     container.insertBefore(alertDiv, container.children[2]);
 
     setTimeout(() => {

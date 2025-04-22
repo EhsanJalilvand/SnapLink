@@ -2,12 +2,10 @@ const crypto = require('crypto');
 const User = require('../../models/user');
 const sendEmail = require('../../services/emailService');
 const bcrypt = require('bcrypt');
-// صفحه فرم درخواست کد بازیابی
 exports.renderForgotPasswordPage = (req, res) => {
     res.render('forgot-password', { title: res.__('forgot_password') });
 };
 
-// ارسال کد به ایمیل
 exports.sendResetCode = async (req, res) => {
     const { email } = req.body;
     try {
@@ -19,10 +17,9 @@ exports.sendResetCode = async (req, res) => {
 
         const resetCode = Math.floor(100000 + Math.random() * 900000).toString();
         user.resetCode = resetCode;
-        user.resetCodeExpire = Date.now() + 15 * 60 * 1000; // 15 دقیقه انقضا
+        user.resetCodeExpire = Date.now() + 15 * 60 * 1000; // 15 Minute Expire Time
         await user.save();
 
-        //await sendEmail(user.email, 'Reset Your Password', `Your code: ${resetCode}`);
         req.flash('message', 'Verification code sent to your email');
         res.redirect(`/reset-password?email=${email}`);
     } catch (error) {
@@ -32,12 +29,10 @@ exports.sendResetCode = async (req, res) => {
     }
 };
 
-// صفحه وارد کردن کد و رمز جدید
 exports.renderResetPasswordPage = (req, res) => {
     res.render('reset-password', { title: res.__('reset_password'), email: req.query.email });
 };
 
-// بررسی کد و ذخیره رمز جدید
 exports.resetPassword = async (req, res) => {
     const { email, code, password,confirmPassword } = req.body;
     try {

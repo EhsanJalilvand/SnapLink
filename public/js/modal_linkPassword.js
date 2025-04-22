@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const linkId = document.getElementById('linkId').value;
         const password = passwordInput.value.trim();
         const confirmPassword = confirmPasswordInput.value.trim();
-
+if(password!=confirmPassword)
+    showAlert('Password Is Not Match', 'danger');
         // Send AJAX request to update the password
         $.ajax({
             url: `/s/password`,
@@ -42,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     $('.modal-backdrop').remove();
                 }, 300);
+                showAlert(`New Password Added`, 'success');
             },
             error: (xhr) => {
                 // If user is unauthorized, redirect to login page
