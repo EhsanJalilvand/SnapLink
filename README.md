@@ -13,7 +13,6 @@ SnapLink is a lightweight, multilingual, and scalable URL shortening service bui
 - ✅ Google OAuth login  
 - ✅ Secure email notifications for password resets and signup confirmations  
 - ✅ Stats tracking for links  
-- ✅ Clean RESTful API structure  
 - ✅ Dockerized for easy deployment  
 
 ---
