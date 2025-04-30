@@ -12,8 +12,8 @@ SnapLink is a lightweight, multilingual, and scalable URL shortening service bui
 - ✅ Full multilingual support via dynamic headers (no URL changes needed)  
 - ✅ Google OAuth login  
 - ✅ Secure email notifications for password resets and signup confirmations  
-- ✅ Stats tracking for links  
-- ✅ Dockerized for easy deployment  
+- ✅ Set password and expiration for links   
+- ✅ Built with Bootstrap 5  
 
 ---
 
